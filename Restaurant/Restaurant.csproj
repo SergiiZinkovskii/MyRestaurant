@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Restaraunt.DAL\Restaraunt.DAL.csproj" />
-    <ProjectReference Include="..\Restaraunt.Domain\Restaraunt.Domain.csproj" />
-    <ProjectReference Include="..\Restauraunt.Services\Restauraunt.Services.csproj" />
+    <ProjectReference Include="..\Restaraunt.DAL\Restaurant.DAL.csproj" />
+    <ProjectReference Include="..\Restaraunt.Domain\Restaurant.Domain.csproj" />
+    <ProjectReference Include="..\Restauraunt.Services\Restaurant.Services.csproj" />
   </ItemGroup>
 
 </Project>

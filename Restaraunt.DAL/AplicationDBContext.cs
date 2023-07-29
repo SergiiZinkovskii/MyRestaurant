@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Restaraunt.Domain.Entity;
-using Restaraunt.Domain.Enum;
+using Restaurant.Domain.Entity;
+using Restaurant.Domain.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaraunt.DAL
+namespace Restaurant.DAL
 {
     public class ApplicationDbContext : DbContext
     {

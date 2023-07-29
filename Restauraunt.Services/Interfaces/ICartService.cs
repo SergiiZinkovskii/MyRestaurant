@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restauraunt.Services.Interfaces
+namespace Restaurant.Services.Interfaces
 {
-    public interface ICartCervice
+    public interface ICartService
     {
     }
 }

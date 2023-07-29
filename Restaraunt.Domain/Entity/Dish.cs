@@ -1,11 +1,11 @@
-﻿using Restaraunt.Domain.Enum;
+﻿using Restaurant.Domain.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaraunt.Domain.Entity
+namespace Restaurant.Domain.Entity
 {
     public class Dish
     {

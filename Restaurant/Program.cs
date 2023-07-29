@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
-using Restaraunt.DAL;
+using Restaurant.DAL;
+using Restaurant;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connection, b => b.MigrationsAssembly("Restaraunt")));
+    options.UseSqlServer(connection, b => b.MigrationsAssembly("Restaurant")));
+builder.Services.InitializeRepositories();
+builder.Services.InitializeServices();
 
 var app = builder.Build();
 

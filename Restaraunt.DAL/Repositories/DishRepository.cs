@@ -1,12 +1,12 @@
-﻿using Restaraunt.DAL.Interfaces;
-using Restaraunt.Domain.Entity;
+﻿using Restaurant.DAL.Interfaces;
+using Restaurant.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaraunt.DAL.Repositories
+namespace Restaurant.DAL.Repositories
 {
     public class DishRepository : IDishRepository
     {
@@ -40,6 +40,11 @@ namespace Restaraunt.DAL.Repositories
             await _db.SaveChangesAsync();
 
             return entity;
+        }
+
+        IQueryable<Dish> IBaseRepository<Dish>.GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

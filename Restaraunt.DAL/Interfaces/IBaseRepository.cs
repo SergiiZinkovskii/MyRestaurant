@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Restaraunt.DAL.Interfaces
+namespace Restaurant.DAL.Interfaces
 {
     public interface IBaseRepository<T>
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaraunt.Domain.Enum
+namespace Restaurant.Domain.Enum
 {
     public enum Category
     {

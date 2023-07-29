@@ -1,11 +1,11 @@
-﻿using Restaraunt.Domain.Enum;
+﻿using Restaurant.Domain.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Restaraunt.Domain.Response
+namespace Restaurant.Domain.Response
 {
     public class BaseResponse<T> : IBaseResponse<T>
     {

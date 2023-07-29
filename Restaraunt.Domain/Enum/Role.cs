@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Restaraunt.Domain.Enum
+namespace Restaurant.Domain.Enum
 {
     public enum Role
     {

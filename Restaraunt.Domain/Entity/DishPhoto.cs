@@ -10,7 +10,7 @@ namespace Restaraunt.Domain.Entity
     {
         public long Id { get; set; }
         public byte[] ImageData { get; set; }
-        public long ProductId { get; set; }
+        public long DishId { get; set; }
         public Dish? Dish { get; set; }
     }
 }

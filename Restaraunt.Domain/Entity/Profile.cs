@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Restaraunt.Domain.Entity
 {
-    internal class Profile
+    public class Profile
     {
+        public long Id { get; set; }
+        public long UserId { get; set; }
+        public User User { get; set; }
     }
 }

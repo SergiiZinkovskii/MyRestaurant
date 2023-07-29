@@ -2,7 +2,53 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="text-center">
+                <h1 class="display-4">Welcome to Our Restaurant</h1>
+                <p class="lead">Indulge in the flavors of our exquisite dishes.</p>
+                <a href="#" class="btn btn-primary btn-lg">View Menu</a>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Special Offers</h3>
+                    <div class="card mb-3">
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Special Offer 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Special Offer 1</h5>
+                            <p class="card-text">Enjoy our special dish with a discount for a limited time.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h3>Upcoming Events</h3>
+                    <div class="card mb-3">
+                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Upcoming Event 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Upcoming Event 1</h5>
+                            <p class="card-text">Join us for a live music performance this weekend.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <h3>Contact Information</h3>
+            <address>
+                <strong>Restaurant Name</strong><br>
+                123 Main Street, City<br>
+                Country<br>
+                <abbr title="Phone">P:</abbr> (123) 456-7890
+            </address>
+            <address>
+                <strong>Email</strong><br>
+                <a href="mailto:info@restaurant.com">info@restaurant.com</a>
+            </address>
+        </div>
+    </div>
 </div>

@@ -11,11 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{3E2C02
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D4EA87DB-46F0-4EA9-A441-9A77EDCB2A10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaraunt.Domain", "..\Restaraunt.Domain\Restaraunt.Domain.csproj", "{0C3FE29A-B750-447E-8FDE-6CBBA279CEBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaraunt.Domain", "..\Restaraunt.Domain\Restaraunt.Domain.csproj", "{0C3FE29A-B750-447E-8FDE-6CBBA279CEBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restaraunt.DAL", "..\Restaraunt.DAL\Restaraunt.DAL.csproj", "{EA59D1A9-25D8-43FC-BB7E-4CB68381668A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restaraunt.DAL", "..\Restaraunt.DAL\Restaraunt.DAL.csproj", "{EA59D1A9-25D8-43FC-BB7E-4CB68381668A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Restauraunt.Services", "..\Restauraunt.Services\Restauraunt.Services.csproj", "{BA46880B-0ADA-457C-93E8-213845CA414D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Restauraunt.Services", "..\Restauraunt.Services\Restauraunt.Services.csproj", "{BA46880B-0ADA-457C-93E8-213845CA414D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

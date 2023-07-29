@@ -8,35 +8,35 @@ using System.Threading.Tasks;
 
 namespace Restaraunt.DAL.Repositories
 {
-    public class CartRepository : ICartRepository
+    public class DishPhotoRepository : IDishPhotoRepository
     {
         private readonly ApplicationDbContext _db;
 
-        public CartRepository(ApplicationDbContext dbContext)
+        public DishPhotoRepository(ApplicationDbContext dbContext)
         {
             _db = dbContext;
         }
 
-        public async Task Create(Cart entity)
+        public async Task Create(DishPhoto entity)
         {
-            await _db.Carts.AddAsync(entity);
+            await _db.DishPhotos.AddAsync(entity);
             await _db.SaveChangesAsync();
         }
 
-        public IQueryable<Cart> GetAll()
+        public IQueryable<DishPhoto> GetAll()
         {
-            return _db.Carts;
+            return _db.DishPhotos;
         }
 
-        public async Task Delete(Cart entity)
+        public async Task Delete(DishPhoto entity)
         {
-            _db.Carts.Remove(entity);
+            _db.DishPhotos.Remove(entity);
             await _db.SaveChangesAsync();
         }
 
-        public async Task<Cart> Update(Cart entity)
+        public async Task<DishPhoto> Update(DishPhoto entity)
         {
-            _db.Carts.Update(entity);
+            _db.DishPhotos.Update(entity);
             await _db.SaveChangesAsync();
 
             return entity;

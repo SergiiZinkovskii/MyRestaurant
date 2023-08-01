@@ -1,0 +1,51 @@
+﻿
+
+@model List<Restaurant.Domain.Entity.Dish>
+
+@{
+    ViewBag.Title = "Restaraunt menu";
+    Layout = "_Layout";
+}
+
+
+
+@if (Model == null)
+{
+    <div class="col-md-8">
+        <div class="card-body">
+            <h5 class="card-title text-center">This page is empty :(</h5>
+            <p class="card-text">
+                This page creating in progress...
+            </p>
+        </div>
+    </div>
+}
+else
+{
+    <div id="productsContainer" class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-md-3">
+                <div class="card">
+
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">Опис: @product.Description ...</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Вартість: @product.Price ₴</li>
+                                            </ul>
+                    <div class="card-body">
+                        <a href="@Url.Action("GetProduct", "Product", new { id = product.Id })" class="btn btn-primary">
+                            Open
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+
+

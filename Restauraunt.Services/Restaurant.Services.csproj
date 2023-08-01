@@ -16,4 +16,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Restaraunt.DAL\Restaurant.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -67,6 +67,59 @@ namespace Restaurant.DAL
             modelBuilder.Entity<Dish>(builder =>
             {
                 builder.ToTable("Dishes").HasKey(x => x.Id);
+                builder.HasData(new Dish[]
+               {
+                new Dish
+                {
+                    Id = 1,
+                    Name = "Bread",
+                    Description = new string('A', 50),
+                    DateCreate = DateTime.Now,
+                    Price = 2500,
+
+                },
+
+
+                new Dish
+                {
+                    Id = 2,
+                    Name = "Wine",
+                    Description = new string('A', 50),
+                    DateCreate = DateTime.Now,
+
+                },
+
+
+                new Dish
+                {
+                    Id = 3,
+                    Name = "Pizza",
+                    Description = new string('A', 50),
+                    DateCreate = DateTime.Now,
+                    Price = 3000,
+
+                },
+                new Dish
+                {
+                    Id = 4,
+                    Name = "Bear",
+                    Description = new string('A', 50),
+                    DateCreate = DateTime.Now,
+                    Price = 120,
+
+                },
+                new Dish
+                {
+                    Id = 5,
+                    Name = "Meat",
+                    Description = new string('A', 50),
+                    DateCreate = DateTime.Now,
+                    Price = 3000,
+
+                }
+
+
+               });
 
 
             });

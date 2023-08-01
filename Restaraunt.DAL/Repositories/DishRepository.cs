@@ -1,4 +1,5 @@
-﻿using Restaurant.DAL.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Restaurant.DAL.Interfaces;
 using Restaurant.Domain.Entity;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,22 @@ namespace Restaurant.DAL.Repositories
             _db = dbContext;
         }
 
+        public async Task<Dish?> Find(long id, CancellationToken cancellationToken)
+        {
+            return await GetAll()
+                .Include(p => p.DishPhotos) 
+                .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+        }
+
         public async Task Create(Dish entity)
         {
             await _db.Dishes.AddAsync(entity);
             await _db.SaveChangesAsync();
         }
 
-        public IQueryable<DishPhoto> GetAll()
+        public IQueryable<Dish> GetAll()
         {
-            return _db.DishPhotos;
+            return _db.Dishes;
         }
 
         public async Task Delete(Dish entity)

@@ -1,0 +1,54 @@
+﻿@model Restaurant.Domain.ViewModel.DishViewModel
+
+@{
+    ViewBag.Title = "Товар";
+    Layout = "_Layout";
+}
+
+
+<form id="product-form" asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" id="productId" value="@Model.Id" />
+    <div class="row">
+        <div class="col-md-8 text-center">
+            <img class="main-image" style="max-width: 100%;" src="data:image/jpeg;base64,@Convert.ToBase64String(Model?.Photos.FirstOrDefault() ?? Array.Empty<byte>())" alt="@Model.Name" />
+        </div>
+        <div class="col-md-4">
+            @foreach (var image in Model?.Photos.Skip(1))
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <img class="thumbnail-image" src="data:image/jpeg;base64,@Convert.ToBase64String(image ?? Array.Empty<byte>())" alt="@Model.Name" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6 d-none">
+            <label asp-for="Id" class="col-form-label"></label>
+            <input type="text" class="form-control" id="Id" asp-for="Id">
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label asp-for="Name" class="col-form-label"></label>
+            <input type="text" class="form-control" asp-for="Name">
+        </div>
+    </div>
+    <label asp-for="Price" class="col-form-label"></label>
+    <div class="row">
+        <div class="input-group col-md-6">
+            <input type="text" class="form-control col-md-6" asp-for="Price" />
+            <div class="input-group-append">
+                <span class="input-group-text">&#8372;</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label asp-for="Description" class="col-form-label"></label>
+            <textarea id="description" type="text" class="form-control" asp-for="Description"></textarea>
+        </div>
+    </div>
+</form>

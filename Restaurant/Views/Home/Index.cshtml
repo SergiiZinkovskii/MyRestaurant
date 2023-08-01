@@ -8,7 +8,10 @@
             <div class="text-center">
                 <h1 class="display-4">Welcome to Our Restaurant</h1>
                 <p class="lead">Indulge in the flavors of our exquisite dishes.</p>
-                <a href="#" class="btn btn-primary btn-lg">View Menu</a>
+                <a class="btn btn-primary" asp-controller="Menu" asp-action="GetDishes">
+                    View menu
+                </a>
+                <a asp-controller="Menu" asp-action="GetOneDish" asp-route-id="1" class="btn btn-danger">One dish</a>
             </div>
 
             <hr class="my-4">

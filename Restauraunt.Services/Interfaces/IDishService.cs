@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Restaurant.Domain.Entity;
+using Restaurant.Domain.Response;
+using Restaurant.Domain.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +11,8 @@ namespace Restaurant.Services.Interfaces
 {
     public interface IDishService
     {
+        IBaseResponse<List<Dish>> GetDishes();
+        Task<DishViewModel?> GetOneDishAsync(long id,
+    CancellationToken cancellationToken);
     }
 }

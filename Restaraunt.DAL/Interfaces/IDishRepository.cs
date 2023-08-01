@@ -9,6 +9,6 @@ namespace Restaurant.DAL.Interfaces
 {
     public interface IDishRepository : IBaseRepository<Dish>
     {
-    
+        Task<Dish?> Find(long id, CancellationToken cancellationToken);
     }
 }

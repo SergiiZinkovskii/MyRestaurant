@@ -26,6 +26,7 @@ namespace Restaurant
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IDishService,  DishService>();
+            services.AddScoped<IAccountService, AccountService>();
 
         }
     }

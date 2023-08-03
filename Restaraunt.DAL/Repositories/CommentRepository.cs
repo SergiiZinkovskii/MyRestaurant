@@ -1,4 +1,5 @@
-﻿using Restaurant.DAL.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Restaurant.DAL.Interfaces;
 using Restaurant.Domain.Entity;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,12 @@ namespace Restaurant.DAL.Repositories
             await _db.SaveChangesAsync();
 
             return entity;
+        }
+        public async Task<List<Comment>> FindAsync(long productId)
+        {
+            return await _db.Comments
+       .Where(c => c.DishId == productId)
+       .ToListAsync();
         }
     }
 }

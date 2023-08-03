@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Restaurant.DAL;
 using Restaurant;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connection, b => b.MigrationsAssembly("Restaurant")));
 builder.Services.InitializeRepositories();
 builder.Services.InitializeServices();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+        options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+    });
 
 var app = builder.Build();
 
@@ -27,7 +34,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

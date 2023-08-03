@@ -1,4 +1,35 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿class App {
+    initProductTypeSelect($element) {
+        let typesUrl = $element.data('types-url');
 
-// Write your JavaScript code.
+        $element.select2({
+            placeholder: "Оберіть тип",
+            minimumInputLength: 0,
+            allowClear: true,
+            dropdownParent: $element.parent(),
+            ajax: {
+                type: "POST",
+                url: typesUrl,
+                dataType: "json",
+                processResults: function (result) {
+                    return {
+                        results: $.map(result, function (val, index) {
+                            return {
+                                id: index,
+                                text: val
+                            };
+                        }),
+                    };
+                }
+            }
+        });
+    }
+}
+
+window.app = new App();
+
+$(function () {
+    $('.product-type-select').each(function () {
+        app.initProductTypeSelect($(this));
+    });
+});

@@ -12,8 +12,8 @@ using Restaurant.DAL;
 namespace Restaurant.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230731144332_Data")]
-    partial class Data
+    [Migration("20230803160354_userUpdates")]
+    partial class userUpdates
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -102,7 +102,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 1L,
                             Category = 0,
-                            DateCreate = new DateTime(2023, 7, 31, 17, 43, 31, 876, DateTimeKind.Local).AddTicks(3602),
+                            DateCreate = new DateTime(2023, 8, 3, 19, 3, 54, 549, DateTimeKind.Local).AddTicks(9171),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Bread",
                             Price = 2500m
@@ -111,7 +111,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 2L,
                             Category = 0,
-                            DateCreate = new DateTime(2023, 7, 31, 17, 43, 31, 876, DateTimeKind.Local).AddTicks(3643),
+                            DateCreate = new DateTime(2023, 8, 3, 19, 3, 54, 549, DateTimeKind.Local).AddTicks(9213),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Wine",
                             Price = 0m
@@ -120,7 +120,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 3L,
                             Category = 0,
-                            DateCreate = new DateTime(2023, 7, 31, 17, 43, 31, 876, DateTimeKind.Local).AddTicks(3645),
+                            DateCreate = new DateTime(2023, 8, 3, 19, 3, 54, 549, DateTimeKind.Local).AddTicks(9216),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Pizza",
                             Price = 3000m
@@ -129,7 +129,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 4L,
                             Category = 0,
-                            DateCreate = new DateTime(2023, 7, 31, 17, 43, 31, 876, DateTimeKind.Local).AddTicks(3647),
+                            DateCreate = new DateTime(2023, 8, 3, 19, 3, 54, 549, DateTimeKind.Local).AddTicks(9219),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Bear",
                             Price = 120m
@@ -138,7 +138,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 5L,
                             Category = 0,
-                            DateCreate = new DateTime(2023, 7, 31, 17, 43, 31, 876, DateTimeKind.Local).AddTicks(3649),
+                            DateCreate = new DateTime(2023, 8, 3, 19, 3, 54, 549, DateTimeKind.Local).AddTicks(9221),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Meat",
                             Price = 3000m
@@ -233,6 +233,13 @@ namespace Restaurant.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("Age")
+                        .HasColumnType("tinyint");
+
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
@@ -247,6 +254,8 @@ namespace Restaurant.Migrations
                         new
                         {
                             Id = 1L,
+                            Address = "123 Main Street",
+                            Age = (byte)0,
                             UserId = 1L
                         });
                 });

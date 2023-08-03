@@ -50,9 +50,6 @@ namespace Restaurant.DAL.Repositories
             return entity;
         }
 
-        IQueryable<Dish> IBaseRepository<Dish>.GetAll()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

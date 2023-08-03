@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Restaurant.Migrations
 {
     /// <inheritdoc />
-    public partial class first : Migration
+    public partial class userUpdates : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -105,6 +105,8 @@ namespace Restaurant.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Age = table.Column<byte>(type: "tinyint", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -148,6 +150,18 @@ namespace Restaurant.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Dishes",
+                columns: new[] { "Id", "Category", "DateCreate", "Description", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1L, 0, new DateTime(2023, 8, 3, 19, 3, 54, 549, DateTimeKind.Local).AddTicks(9171), "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "Bread", 2500m },
+                    { 2L, 0, new DateTime(2023, 8, 3, 19, 3, 54, 549, DateTimeKind.Local).AddTicks(9213), "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "Wine", 0m },
+                    { 3L, 0, new DateTime(2023, 8, 3, 19, 3, 54, 549, DateTimeKind.Local).AddTicks(9216), "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "Pizza", 3000m },
+                    { 4L, 0, new DateTime(2023, 8, 3, 19, 3, 54, 549, DateTimeKind.Local).AddTicks(9219), "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "Bear", 120m },
+                    { 5L, 0, new DateTime(2023, 8, 3, 19, 3, 54, 549, DateTimeKind.Local).AddTicks(9221), "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", "Meat", 3000m }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Name", "Password", "Role" },
                 values: new object[,]
@@ -158,8 +172,8 @@ namespace Restaurant.Migrations
 
             migrationBuilder.InsertData(
                 table: "Profiles",
-                columns: new[] { "Id", "UserId" },
-                values: new object[] { 1L, 1L });
+                columns: new[] { "Id", "Address", "Age", "UserId" },
+                values: new object[] { 1L, "123 Main Street", (byte)0, 1L });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_UserId",

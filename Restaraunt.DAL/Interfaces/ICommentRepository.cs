@@ -9,5 +9,6 @@ namespace Restaurant.DAL.Interfaces
 {
     public interface ICommentRepository : IBaseRepository<Comment>
     {
+        public Task<List<Comment>> FindAsync(long id);
     }
 }

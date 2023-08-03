@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Restaurant.Domain.Entity;
 using Restaurant.Domain.Enum;
+using Restaurant.Domain.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,14 +38,14 @@ namespace Restaurant.DAL
                     {
                         Id = 1,
                         Name = "Admin",
-                        Password = "123456",
+                        Password = HashPasswordHelper.HashPassowrd("123456"),
                         Role = Role.Admin
                     },
                     new User()
                     {
                         Id = 2,
                         Name = "Moderator",
-                        Password = "654321",
+                        Password = HashPasswordHelper.HashPassowrd("654321"),
                         Role = Role.Moderator
                     }
                 });
@@ -124,17 +125,19 @@ namespace Restaurant.DAL
 
             });
 
+
             modelBuilder.Entity<Profile>(builder =>
             {
                 builder.ToTable("Profiles").HasKey(x => x.Id);
 
                 builder.Property(x => x.Id).ValueGeneratedOnAdd();
-
+                builder.Property(x => x.Address).IsRequired(); 
 
                 builder.HasData(new Profile()
                 {
                     Id = 1,
-                    UserId = 1
+                    UserId = 1,
+                    Address = "123 Main Street" 
                 });
             });
 

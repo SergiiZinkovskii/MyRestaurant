@@ -12,8 +12,8 @@ using Restaurant.DAL;
 namespace Restaurant.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230729123148_first")]
-    partial class first
+    [Migration("20230803160436_1")]
+    partial class _1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,6 +96,53 @@ namespace Restaurant.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Dishes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Category = 0,
+                            DateCreate = new DateTime(2023, 8, 3, 19, 4, 36, 504, DateTimeKind.Local).AddTicks(6022),
+                            Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            Name = "Bread",
+                            Price = 2500m
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Category = 0,
+                            DateCreate = new DateTime(2023, 8, 3, 19, 4, 36, 504, DateTimeKind.Local).AddTicks(6139),
+                            Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            Name = "Wine",
+                            Price = 0m
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Category = 0,
+                            DateCreate = new DateTime(2023, 8, 3, 19, 4, 36, 504, DateTimeKind.Local).AddTicks(6145),
+                            Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            Name = "Pizza",
+                            Price = 3000m
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Category = 0,
+                            DateCreate = new DateTime(2023, 8, 3, 19, 4, 36, 504, DateTimeKind.Local).AddTicks(6150),
+                            Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            Name = "Bear",
+                            Price = 120m
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Category = 0,
+                            DateCreate = new DateTime(2023, 8, 3, 19, 4, 36, 504, DateTimeKind.Local).AddTicks(6153),
+                            Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+                            Name = "Meat",
+                            Price = 3000m
+                        });
                 });
 
             modelBuilder.Entity("Restaurant.Domain.Entity.DishPhoto", b =>
@@ -186,6 +233,13 @@ namespace Restaurant.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("Age")
+                        .HasColumnType("tinyint");
+
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
@@ -200,6 +254,8 @@ namespace Restaurant.Migrations
                         new
                         {
                             Id = 1L,
+                            Address = "123 Main Street",
+                            Age = (byte)0,
                             UserId = 1L
                         });
                 });

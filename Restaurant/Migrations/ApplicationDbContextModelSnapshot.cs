@@ -99,7 +99,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 1L,
                             Category = 0,
-                            DateCreate = new DateTime(2023, 7, 31, 17, 43, 31, 876, DateTimeKind.Local).AddTicks(3602),
+                            DateCreate = new DateTime(2023, 8, 3, 19, 36, 34, 457, DateTimeKind.Local).AddTicks(2066),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Bread",
                             Price = 2500m
@@ -108,7 +108,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 2L,
                             Category = 0,
-                            DateCreate = new DateTime(2023, 7, 31, 17, 43, 31, 876, DateTimeKind.Local).AddTicks(3643),
+                            DateCreate = new DateTime(2023, 8, 3, 19, 36, 34, 457, DateTimeKind.Local).AddTicks(2107),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Wine",
                             Price = 0m
@@ -117,7 +117,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 3L,
                             Category = 0,
-                            DateCreate = new DateTime(2023, 7, 31, 17, 43, 31, 876, DateTimeKind.Local).AddTicks(3645),
+                            DateCreate = new DateTime(2023, 8, 3, 19, 36, 34, 457, DateTimeKind.Local).AddTicks(2109),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Pizza",
                             Price = 3000m
@@ -126,7 +126,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 4L,
                             Category = 0,
-                            DateCreate = new DateTime(2023, 7, 31, 17, 43, 31, 876, DateTimeKind.Local).AddTicks(3647),
+                            DateCreate = new DateTime(2023, 8, 3, 19, 36, 34, 457, DateTimeKind.Local).AddTicks(2112),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Bear",
                             Price = 120m
@@ -135,7 +135,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 5L,
                             Category = 0,
-                            DateCreate = new DateTime(2023, 7, 31, 17, 43, 31, 876, DateTimeKind.Local).AddTicks(3649),
+                            DateCreate = new DateTime(2023, 8, 3, 19, 36, 34, 457, DateTimeKind.Local).AddTicks(2115),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Meat",
                             Price = 3000m
@@ -230,6 +230,13 @@ namespace Restaurant.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte>("Age")
+                        .HasColumnType("tinyint");
+
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
@@ -244,6 +251,8 @@ namespace Restaurant.Migrations
                         new
                         {
                             Id = 1L,
+                            Address = "123 Main Street",
+                            Age = (byte)0,
                             UserId = 1L
                         });
                 });
@@ -277,14 +286,14 @@ namespace Restaurant.Migrations
                         {
                             Id = 1L,
                             Name = "Admin",
-                            Password = "123456",
+                            Password = "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
                             Role = 2
                         },
                         new
                         {
                             Id = 2L,
                             Name = "Moderator",
-                            Password = "654321",
+                            Password = "481f6cc0511143ccdd7e2d1b1b94faf0a700a8b49cd13922a70b5ae28acaa8c5",
                             Role = 1
                         });
                 });

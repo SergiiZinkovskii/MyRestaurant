@@ -34,7 +34,7 @@ namespace Restaurant.Controllers
             var list = response.Data;
             if (response.StatusCode != Domain.Enum.StatusCode.OK) return View("Error", $"{response.Description}");
             var newList = list.Where(item => item.Category.ToString() == category).ToList();
-            return View(newList);
+            return View("GetDishes", newList);
         }
 
         [Authorize(Roles = "Admin")]
@@ -140,9 +140,12 @@ namespace Restaurant.Controllers
             await _dishService.Edit(viewModel, viewModel.Id);
             return RedirectToAction("GetDishes");
         }
-    
 
-    public IActionResult Index()
+        public IActionResult SortedMenu()
+        {
+            return View();
+        }
+        public IActionResult Index()
         {
             return View();
         }

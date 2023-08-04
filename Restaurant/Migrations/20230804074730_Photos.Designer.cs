@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaurant.DAL;
 
@@ -11,9 +12,11 @@ using Restaurant.DAL;
 namespace Restaurant.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230804074730_Photos")]
+    partial class Photos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -99,7 +102,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 1L,
                             Category = 0,
-                            DateCreate = new DateTime(2023, 8, 4, 15, 32, 44, 37, DateTimeKind.Local).AddTicks(4927),
+                            DateCreate = new DateTime(2023, 8, 4, 10, 47, 30, 454, DateTimeKind.Local).AddTicks(7568),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Bread",
                             Price = 2500m
@@ -107,8 +110,8 @@ namespace Restaurant.Migrations
                         new
                         {
                             Id = 2L,
-                            Category = 7,
-                            DateCreate = new DateTime(2023, 8, 4, 15, 32, 44, 37, DateTimeKind.Local).AddTicks(4968),
+                            Category = 0,
+                            DateCreate = new DateTime(2023, 8, 4, 10, 47, 30, 454, DateTimeKind.Local).AddTicks(7615),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Wine",
                             Price = 0m
@@ -116,8 +119,8 @@ namespace Restaurant.Migrations
                         new
                         {
                             Id = 3L,
-                            Category = 3,
-                            DateCreate = new DateTime(2023, 8, 4, 15, 32, 44, 37, DateTimeKind.Local).AddTicks(4971),
+                            Category = 0,
+                            DateCreate = new DateTime(2023, 8, 4, 10, 47, 30, 454, DateTimeKind.Local).AddTicks(7618),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Pizza \"Paperoni\" ",
                             Price = 3000m
@@ -125,8 +128,8 @@ namespace Restaurant.Migrations
                         new
                         {
                             Id = 4L,
-                            Category = 8,
-                            DateCreate = new DateTime(2023, 8, 4, 15, 32, 44, 37, DateTimeKind.Local).AddTicks(4974),
+                            Category = 0,
+                            DateCreate = new DateTime(2023, 8, 4, 10, 47, 30, 454, DateTimeKind.Local).AddTicks(7620),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Beer \"Corona\"",
                             Price = 120m
@@ -134,8 +137,8 @@ namespace Restaurant.Migrations
                         new
                         {
                             Id = 5L,
-                            Category = 1,
-                            DateCreate = new DateTime(2023, 8, 4, 15, 32, 44, 37, DateTimeKind.Local).AddTicks(4977),
+                            Category = 0,
+                            DateCreate = new DateTime(2023, 8, 4, 10, 47, 30, 454, DateTimeKind.Local).AddTicks(7622),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Mongolian Beef",
                             Price = 3000m

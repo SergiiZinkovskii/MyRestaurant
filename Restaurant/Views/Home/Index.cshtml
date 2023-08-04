@@ -11,6 +11,7 @@
                 <a class="btn btn-primary" asp-controller="Menu" asp-action="GetDishes">
                     View menu
                 </a>
+                <a asp-controller="Menu" asp-action="SortedMenu"  class="btn btn-danger">Sorted menu</a>
                 <a asp-controller="Menu" asp-action="GetOneDish" asp-route-id="1" class="btn btn-danger">One dish</a>
                 <a asp-controller="Menu" asp-action="Save"  class="btn btn-warning">Add dish</a>
             </div>
@@ -21,7 +22,7 @@
                 <div class="col-md-6">
                     <h3>Special Offers</h3>
                     <div class="card mb-3">
-                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Special Offer 1">
+                        <img src="~/img/icons/special.jpg" class="card-img-top" alt="Special Offer 1">
                         <div class="card-body">
                             <h5 class="card-title">Special Offer 1</h5>
                             <p class="card-text">Enjoy our special dish with a discount for a limited time.</p>
@@ -31,7 +32,7 @@
                 <div class="col-md-6">
                     <h3>Upcoming Events</h3>
                     <div class="card mb-3">
-                        <img src="https://via.placeholder.com/300" class="card-img-top" alt="Upcoming Event 1">
+                        <img src="~/img/icons/event.webp" class="card-img-top" alt="Upcoming Event 1">
                         <div class="card-body">
                             <h5 class="card-title">Upcoming Event 1</h5>
                             <p class="card-text">Join us for a live music performance this weekend.</p>

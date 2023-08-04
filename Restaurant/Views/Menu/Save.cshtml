@@ -40,18 +40,5 @@
     <button type = "submit" class=" btn btn-primary">ОК</button>
 </form>
 
-@section pageScripts {
-    <script>
-        $(document).ready(function () {
-            var mainImage = document.querySelector('.main-image');
-            var thumbnailImages = document.querySelectorAll('.thumbnail-image');
 
-            thumbnailImages.forEach(function (thumbnail) {
-                thumbnail.addEventListener('click', function () {
-                    mainImage.src = thumbnail.src;
-                });
-            });
-        });
-    </script>
-}
         

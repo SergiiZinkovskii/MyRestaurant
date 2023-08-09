@@ -5,9 +5,8 @@
     Layout = "_Layout";
 }
 
-
-<form id="product-form" asp-action="Edit" enctype="multipart/form-data">
-    <input type="hidden" id="productId" value="@Model.Id" />
+<form id="dish-form" asp-action="Edit" enctype="multipart/form-data">
+    <input type="hidden" id="dishtId" value="@Model.Id" />
     <div class="row">
         <div class="col-md-8 text-center">
             <img class="main-image" style="max-width: 100%;" src="data:image/jpeg;base64,@Convert.ToBase64String(Model?.Photos.FirstOrDefault() ?? Array.Empty<byte>())" alt="@Model.Name" />
@@ -51,4 +50,81 @@
             <textarea id="description" type="text" class="form-control" asp-for="Description"></textarea>
         </div>
     </div>
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label asp-for="Category" class="col-form-label"></label>
+            @if (User.IsInRole("Admin"))
+            {
+                <select asp-for="Category" class="form-control product-type-select" data-types-url="@Url.Action("GetTypes", "Menu")"></select>
+            }
+            else
+            {
+                <textarea asp-for="Category" class="form-control"></textarea>
+
+            }
+        </div>
+    </div>
+    @if (User.IsInRole("Admin"))
+    {
+
+        <div class="form-group col-md-6">
+            <label asp-for="DateCreate" class="col-form-label"></label>
+            <input class="form-control" asp-for="DateCreate" />
+        </div>
+    }
+
+    <div class="modal-body">
+        <a id="create-order-btn" class="btn btn-success">To cart</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <button type="submit" class="btn btn-danger">Edit</button>
+            <a id="delete-dish-btn" class="btn btn-danger">Delete</a>
+        }
+    </div>
 </form>
+
+
+
+@section pageScripts
+    {
+    <script>
+
+        $(document).ready(function () {
+            var mainImage = document.querySelector('.main-image');
+            var thumbnailImages = document.querySelectorAll('.thumbnail-image');
+
+            thumbnailImages.forEach(function (thumbnail) {
+                thumbnail.addEventListener('click', function () {
+                    mainImage.src = thumbnail.src;
+                });
+            });
+
+            var $description = $('#description');
+            var lineHeight = parseInt($description.css('lineHeight'));
+            var lines = $description.val().split('\n').length;
+            $description.height(lineHeight * lines);
+
+            var createOrderBtn = document.getElementById('create-order-btn');
+            createOrderBtn.addEventListener('click', function () {
+                var form = document.getElementById('dish-form');
+                var formData = new FormData(form);
+                var dishId = formData.get('Id');
+                var url = '/Order/CreateOrder/' + dishtId;
+                window.location.href = url;
+            });
+
+            var deleteOrderBtn = $('delete-dish-btn');
+            if (deleteOrderBtn.length > 0) {
+                deleteOrderBtn.addEventListener('click', function () {
+                    var form = document.getElementById('dish-form');
+                    var formData = new FormData(form);
+                    var productId = formData.get('Id');
+                    var url = '/Menu/Delete/' + dishId;
+                    window.location.href = url;
+                });
+            }
+
+           
+        });
+    </script>
+}

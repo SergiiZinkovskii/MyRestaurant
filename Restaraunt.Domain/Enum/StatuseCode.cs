@@ -10,7 +10,7 @@ namespace Restaurant.Domain.Enum
     {
         UserNotFound = 0,
         UserAlreadyExists = 1,
-        ProductNotFound = 10,
+        EntityNotFiund = 10,
         OrderNotFound = 20,
         OK = 200,
         InternalServerError = 500

@@ -1,5 +1,6 @@
 ﻿using Restaurant.Domain.Entity;
 using Restaurant.Domain.Response;
+using Restaurant.Domain.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace Restaurant.Services.Interfaces
 {
     public interface IOrderService
     {
-       
+        Task<IBaseResponse<Order>> Create(CreateOrderViewModel model);
+        Task<IBaseResponse<bool>> Delete(long id);
     }
 }

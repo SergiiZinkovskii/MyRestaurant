@@ -1,0 +1,116 @@
+﻿@model Restaurant.Domain.ViewModel.ProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "_Layout";
+}
+<br />
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <form id="profileFormId">
+                    <input asp-for="Id" hidden="hidden" />
+                    <h5 class="card-title">Profile data</h5>
+                    <div class="mb-3">
+                        <label class="form-label text-black-50">Age</label>
+                        <input type="text" class="form-control" asp-for="Age">
+                        <div class="form-text">The age must be between 0 and 150 years.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-black-50">Addres</label>
+                        <textarea class="form-control" asp-for="Address" rows="3"></textarea>
+                        <div class="form-text">The length of the address must be between 5 and 200 characters.</div>
+                    </div>
+                    <div class="card-buttons-group">
+                        <button class='btn btn-primary' id='saveProfileId'>Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <form id="accountFormId">
+                    <h5 class="card-title">Account data</h5>
+                    <div class="mb-3">
+                        <label class="form-label text-black-50">Login</label>
+                        <input type="text" class="form-control" asp-for="UserName" disabled="disabled">
+                        <div class="form-text">The length of the account must be between 3 and 20 characters.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-black-50">New password</label>
+                        <input name="NewPassword" class="form-control textbox-dg font-weight-bold text-center" type="password">
+                    </div>
+                    <div class="card-buttons-group">
+                        <button class='btn btn-primary' id='saveAccountId'>Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+
+@section pageScripts
+    {
+    <script>
+        $('#saveProfileId').on('click', function (e) {
+            e.preventDefault();
+            const data = $('#profileFormId').serialize()
+            $.ajax({
+                url: '@Url.Action("Save", "Profile")',
+                type: 'POST',
+                data: data,
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Information',
+                        text: response.description,
+                        icon: 'success',
+                        confirmButtonText: 'ОК'
+                    })
+                },
+                error: function (data) {
+                    Swal.fire({
+                        title: 'Information',
+                        text: 'Validation error',
+                        icon: 'error',
+                        confirmButtonText: 'ОК'
+                    })
+                }
+            });
+        });
+
+        $('#saveAccountId').on('click', function (e) {
+            e.preventDefault();
+
+            $('#UserName').removeAttr('disabled')
+            const data = $('#accountFormId').serialize()
+            $('#UserName').attr('disabled', 'disabled')
+
+            $.ajax({
+                url: '@Url.Action("ChangePassword", "Account")',
+                type: 'POST',
+                data: data,
+                success: function (response) {
+                    Swal.fire({
+                        title: 'Information',
+                        text: response.description,
+                        icon: 'success',
+                        confirmButtonText: 'ОК'
+                    })
+                },
+                error: function (response) {
+                    Swal.fire({
+                        title: 'Information',
+                        text: response.responseJSON.errorMessage,
+                        icon: 'error',
+                        confirmButtonText: 'ОК'
+                    })
+                }
+            });
+        });
+    </script>
+}

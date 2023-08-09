@@ -22,4 +22,6 @@
     <ProjectReference Include="..\Restauraunt.Services\Restaurant.Services.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties local_1json__JsonSchema="https://json.schemastore.org/appsettings.json" /></VisualStudio></ProjectExtensions>
+
 </Project>

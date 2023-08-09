@@ -5,6 +5,7 @@ using Restaurant;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddJsonFile("local.json");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

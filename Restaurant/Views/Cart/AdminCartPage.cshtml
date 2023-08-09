@@ -1,0 +1,54 @@
+﻿@model List<Restaurant.Domain.ViewModel.OrderViewModel>
+
+@{
+    ViewBag.Title = "Order";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row">
+        @if (Model == null || Model.Count == 0)
+        {
+            <div class="col-md-12 text-center">
+                <div class="card mt-5">
+                    <div class="card-body">
+                        <h5 class="card-title">Order list is empty :(</h5>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <div class="col-md-3 mt-4">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <h5 class="card-title">@item.DishName</h5>
+                            <p class="card-text">Category: @item.Category</p>
+                            <p class="card-text">Price: @item.Price</p>
+                            <p class="card-text">Quantity: @item.Quantity</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Name: @item.FirstName @item.LastName</li>
+                            <li class="list-group-item">Address: @item.Address</li>
+                            <li class="list-group-item">Phone: @item.Phone</li>
+                            <li class="list-group-item">Date of creation: @item.DateCreate</li>
+                            <li class="list-group-item">Post: @item.Post</li>
+                            <li class="list-group-item">Payment: @item.Payment</li>
+                            <li class="list-group-item">Comments: @item.Comments</li>
+                        </ul>
+                        <div class="card-footer text-center">
+                            <button class="btn btn-primary" onclick="openModal({ url: '/Cart/GetItemByAdmin', data: '@item.Id' })"
+                                    data-toggle="ajax-modal" data-target="Modal">
+                                Відкрити
+                            </button>
+                            <a asp-controller="Order" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

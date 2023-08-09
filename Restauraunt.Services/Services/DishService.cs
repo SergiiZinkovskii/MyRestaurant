@@ -217,7 +217,7 @@ namespace Restaurant.Services.Services
                     return new BaseResponse<Dish>()
                     {
                         Description = "Dish not found",
-                        StatusCode = StatusCode.ProductNotFound
+                        StatusCode = StatusCode.EntityNotFiund
                     };
                 }
 

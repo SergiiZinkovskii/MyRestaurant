@@ -9,14 +9,14 @@ namespace Restaurant.Domain.ViewModel
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Введіть ім'я")]
-        [MaxLength(20, ErrorMessage = "Ім'я має складатися меньше ніж з 20 символів")]
-        [MinLength(2, ErrorMessage = "Ім'я має складатися більше ніж з одного символу")]
+        [Required(ErrorMessage = "Enter your name")]
+        [MaxLength(20, ErrorMessage = "The name must be less than 20 characters")]
+        [MinLength(2, ErrorMessage = "The name must consist of more than one character")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Введіть пароль")]
+        [Required(ErrorMessage = "Enter your password")]
         [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
     }
 }

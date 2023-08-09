@@ -1,0 +1,31 @@
+﻿@model Restaurant.Domain.ViewModel.OrderViewModel
+
+<div class="row">
+    <div class="col-md-12">
+        @if (Model.Photo != null)
+        {
+            <img src="data:image/jpeg;base64,@Convert.ToBase64String(Model.Photo?.ImageData ?? Array.Empty<byte>())" class="img-fluid" />
+        }
+        else
+        {
+            <img src="https://example.com/default-image.jpg" class="img-fluid" />
+        }
+    </div>
+    <div class="col-md-6">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Dish: @Model.DishName</li>
+            <li class="list-group-item">Тип: @Model.Category</li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Name: @Model.FirstName @Model.LastName.Substring(0, 1) @Model.MiddleName.Substring(0, 1)</li>
+            <li class="list-group-item">Adress: @Model.Address</li>
+            <li class="list-group-item">Creation date: @Model.DateCreate</li>
+            <li class="list-group-item">Phone: @Model.Phone</li>
+            <li class="list-group-item">Send: @Model.Post</li>
+            <li class="list-group-item">Payment: @Model.Payment</li>
+            <li class="list-group-item">Comments: @Model.Comments</li>
+        </ul>
+    </div>
+</div>

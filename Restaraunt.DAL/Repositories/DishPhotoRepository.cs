@@ -20,7 +20,6 @@ namespace Restaurant.DAL.Repositories
         public async Task Create(DishPhoto entity)
         {
             await _db.DishPhotos.AddAsync(entity);
-            await _db.SaveChangesAsync();
         }
 
         public IQueryable<DishPhoto> GetAll()
@@ -31,14 +30,11 @@ namespace Restaurant.DAL.Repositories
         public async Task Delete(DishPhoto entity)
         {
             _db.DishPhotos.Remove(entity);
-            await _db.SaveChangesAsync();
         }
 
         public async Task<DishPhoto> Update(DishPhoto entity)
         {
             _db.DishPhotos.Update(entity);
-            await _db.SaveChangesAsync();
-
             return entity;
         }
     }

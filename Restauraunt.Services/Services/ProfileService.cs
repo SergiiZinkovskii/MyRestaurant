@@ -18,15 +18,18 @@ namespace Restaurant.Services.Services
     {
         private readonly ILogger<ProfileService> _logger;
         private readonly IProfileRepository _profileRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
         public ProfileService(IProfileRepository profileRepository,
-            ILogger<ProfileService> logger)
+            ILogger<ProfileService> logger,
+            IUnitOfWork unitOfWork)
         {
             _profileRepository = profileRepository;
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<Response<ProfileViewModel>> GetProfile(string userName)
+        public async Task<BaseResponse<ProfileViewModel>> GetProfile(string userName)
         {
             try
             {
@@ -40,7 +43,7 @@ namespace Restaurant.Services.Services
                     })
                     .FirstOrDefaultAsync(x => x.UserName == userName);
 
-                return new Response<ProfileViewModel>()
+                return new BaseResponse<ProfileViewModel>()
                 {
                     Data = profile,
                     StatusCode = StatusCode.OK
@@ -49,7 +52,7 @@ namespace Restaurant.Services.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"[ProfileService.GetProfile] error: {ex.Message}");
-                return new Response<ProfileViewModel>()
+                return new BaseResponse<ProfileViewModel>()
                 {
                     StatusCode = StatusCode.InternalServerError,
                     Description = $"Internal error: {ex.Message}"
@@ -57,7 +60,7 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public async Task<Response<Profile>> Save(ProfileViewModel model)
+        public async Task<BaseResponse<Profile>> Save(ProfileViewModel model)
         {
             try
             {
@@ -68,8 +71,9 @@ namespace Restaurant.Services.Services
                 profile.Age = model.Age;
 
                 await _profileRepository.Update(profile);
+                await _unitOfWork.CommitAsync();
 
-                return new Response<Profile>()
+                return new BaseResponse<Profile>()
                 {
                     Data = profile,
                     Description = "The data has been updated",
@@ -79,7 +83,7 @@ namespace Restaurant.Services.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"[ProfileService.Save] error: {ex.Message}");
-                return new Response<Profile>()
+                return new BaseResponse<Profile>()
                 {
                     StatusCode = StatusCode.InternalServerError,
                     Description = $"internal error: {ex.Message}"

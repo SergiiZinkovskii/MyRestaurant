@@ -1,4 +1,5 @@
-﻿using Restaurant.DAL.Interfaces;
+﻿using Restaurant.DAL;
+using Restaurant.DAL.Interfaces;
 using Restaurant.DAL.Repositories;
 using Restaurant.Services.Interfaces;
 using Restaurant.Services.Services;
@@ -16,6 +17,7 @@ namespace Restaurant
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
             services.AddScoped<IDishPhotoRepository, DishPhotoRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
         public static void InitializeServices(this IServiceCollection services)

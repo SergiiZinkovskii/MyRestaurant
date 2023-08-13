@@ -58,7 +58,7 @@ namespace Restaurant.Controllers
 
             var data = await _dishService.GetOneDishAsync(id, cancellationToken);
 
-            var response = new Response<DishViewModel>();
+            var response = new BaseResponse<DishViewModel>();
 
             if (data == null)
             {
@@ -67,7 +67,7 @@ namespace Restaurant.Controllers
             }
             else
             {
-                response = new Response<DishViewModel>()
+                response = new BaseResponse<DishViewModel>()
                 {
                     StatusCode = Domain.Enum.StatusCode.OK,
                     Data = data

@@ -11,13 +11,13 @@ namespace Restaurant.Services.Interfaces
 {
     public interface IDishService
     {
-        Response<Dictionary<int, string>> GetTypes();
-        IResponse<List<Dish>> GetDishes();
+        BaseResponse<Dictionary<int, string>> GetTypes();
+        IBaseResponse<List<Dish>> GetDishes();
         Task<DishViewModel?> GetOneDishAsync(long id,
             CancellationToken cancellationToken);
-        Task<Response<Dictionary<long, string>>> GetOneDishAsync(string term);
-        Task<IResponse<Dish>> Create(DishViewModel model, List<byte[]> imageDataList);
-        Task<IResponse<bool>> DeleteDish(long id);
-        Task<IResponse<Dish>> Edit(DishViewModel model, long Id);
+        Task<BaseResponse<Dictionary<long, string>>> GetOneDishAsync(string term);
+        Task<IBaseResponse<Dish>> Create(DishViewModel model, List<byte[]> imageDataList);
+        Task<IBaseResponse<bool>> DeleteDish(long id);
+        Task<IBaseResponse<Dish>> Edit(DishViewModel model, long Id);
     }
 }

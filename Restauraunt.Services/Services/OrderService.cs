@@ -5,11 +5,6 @@ using Restaurant.Domain.Enum;
 using Restaurant.Domain.Response;
 using Restaurant.Domain.ViewModel;
 using Restaurant.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Restaurant.Services.Services
 {
@@ -17,14 +12,16 @@ namespace Restaurant.Services.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly IOrderRepository _orderRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public OrderService(IUserRepository userRepository, IOrderRepository orderRepository)
+        public OrderService(IUserRepository userRepository, IOrderRepository orderRepository, IUnitOfWork unitOfWork)
         {
             _userRepository = userRepository;
             _orderRepository = orderRepository;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<IResponse<Order>> Create(CreateOrderViewModel model)
+        public async Task<IBaseResponse<Order>> Create(CreateOrderViewModel model)
         {
             try
             {
@@ -34,7 +31,7 @@ namespace Restaurant.Services.Services
 
                 if (user == null)
                 {
-                    return new Response<Order>()
+                    return new BaseResponse<Order>()
                     {
                         Description = "User Not Found",
                         StatusCode = StatusCode.UserNotFound
@@ -56,8 +53,9 @@ namespace Restaurant.Services.Services
                 };
 
                 await _orderRepository.Create(order);
+                await _unitOfWork.CommitAsync();
 
-                return new Response<Order>()
+                return new BaseResponse<Order>()
                 {
                     Description = "Order created",
                     StatusCode = StatusCode.OK
@@ -65,7 +63,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new Response<Order>()
+                return new BaseResponse<Order>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError
@@ -73,7 +71,7 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public async Task<IResponse<bool>> Delete(long id)
+        public async Task<IBaseResponse<bool>> Delete(long id)
         {
             try
             {
@@ -83,7 +81,7 @@ namespace Restaurant.Services.Services
 
                 if (order == null)
                 {
-                    return new Response<bool>()
+                    return new BaseResponse<bool>()
                     {
                         StatusCode = StatusCode.OrderNotFound,
                         Description = "Order not found"
@@ -91,7 +89,8 @@ namespace Restaurant.Services.Services
                 }
 
                 await _orderRepository.Delete(order);
-                return new Response<bool>()
+                await _unitOfWork.CommitAsync();
+                return new BaseResponse<bool>()
                 {
                     StatusCode = StatusCode.OK,
                     Description = "Order deleted"
@@ -99,7 +98,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new Response<bool>()
+                return new BaseResponse<bool>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError

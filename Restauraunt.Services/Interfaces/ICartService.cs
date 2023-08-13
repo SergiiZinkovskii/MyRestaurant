@@ -10,9 +10,9 @@ namespace Restaurant.Services.Interfaces
 {
     public interface ICartService
     {
-        Task<IResponse<IEnumerable<OrderViewModel>>> GetItems(string userName);
-        Task<IResponse<IEnumerable<OrderViewModel>>> GetAllItems();
-        Task<IResponse<OrderViewModel>> GetItem(string userName, long id);
-        Task<IResponse<OrderViewModel>> GetItemByAdmin(long id);
+        Task<IBaseResponse<IEnumerable<OrderViewModel>>> GetItems(string userName);
+        Task<IBaseResponse<IEnumerable<OrderViewModel>>> GetAllItems();
+        Task<IBaseResponse<OrderViewModel>> GetItem(string userName, long id);
+        Task<IBaseResponse<OrderViewModel>> GetItemByAdmin(long id);
     }
 }

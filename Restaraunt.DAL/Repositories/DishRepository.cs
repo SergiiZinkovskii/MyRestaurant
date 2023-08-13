@@ -28,7 +28,7 @@ namespace Restaurant.DAL.Repositories
         public async Task Create(Dish entity)
         {
             await _db.Dishes.AddAsync(entity);
-            await _db.SaveChangesAsync();
+            
         }
 
         public IQueryable<Dish> GetAll()
@@ -39,13 +39,13 @@ namespace Restaurant.DAL.Repositories
         public async Task Delete(Dish entity)
         {
             _db.Dishes.Remove(entity);
-            await _db.SaveChangesAsync();
+           
         }
 
         public async Task<Dish> Update(Dish entity)
         {
             _db.Dishes.Update(entity);
-            await _db.SaveChangesAsync();
+           
 
             return entity;
         }

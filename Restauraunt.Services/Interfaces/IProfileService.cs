@@ -11,7 +11,7 @@ namespace Restaurant.Services.Interfaces
 {
     public interface IProfileService
     {
-        Task<Response<ProfileViewModel>> GetProfile(string userName);
-        Task<Response<Profile>> Save(ProfileViewModel model);
+        Task<BaseResponse<ProfileViewModel>> GetProfile(string userName);
+        Task<BaseResponse<Profile>> Save(ProfileViewModel model);
     }
 }

@@ -11,8 +11,8 @@ namespace Restaurant.Services.Interfaces
 {
     public interface IAccountService
     {
-        Task<Response<ClaimsIdentity>> Register(RegisterViewModel model);
-        Task<Response<ClaimsIdentity>> Login(LoginViewModel model);
-        Task<Response<bool>> ChangePassword(ChangePasswordViewModel model);
+        Task<BaseResponse<ClaimsIdentity>> Register(RegisterViewModel model);
+        Task<BaseResponse<ClaimsIdentity>> Login(LoginViewModel model);
+        Task<BaseResponse<bool>> ChangePassword(ChangePasswordViewModel model);
     }
 }

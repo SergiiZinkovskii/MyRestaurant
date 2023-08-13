@@ -20,7 +20,7 @@ namespace Restaurant.DAL.Repositories
         public async Task Create(User entity)
         {
             await _db.Users.AddAsync(entity);
-            await _db.SaveChangesAsync();
+            
         }
 
         public IQueryable<User> GetAll()
@@ -31,13 +31,13 @@ namespace Restaurant.DAL.Repositories
         public async Task Delete(User entity)
         {
             _db.Users.Remove(entity);
-            await _db.SaveChangesAsync();
+            
         }
 
         public async Task<User> Update(User entity)
         {
             _db.Users.Update(entity);
-            await _db.SaveChangesAsync();
+            
 
             return entity;
         }

@@ -20,7 +20,6 @@ namespace Restaurant.DAL.Repositories
         public async Task Create(Profile entity)
         {
             await _db.Profiles.AddAsync(entity);
-            await _db.SaveChangesAsync();
         }
 
         public IQueryable<Profile> GetAll()

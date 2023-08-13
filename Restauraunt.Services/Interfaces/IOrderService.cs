@@ -11,7 +11,7 @@ namespace Restaurant.Services.Interfaces
 {
     public interface IOrderService
     {
-        Task<IResponse<Order>> Create(CreateOrderViewModel model);
-        Task<IResponse<bool>> Delete(long id);
+        Task<IBaseResponse<Order>> Create(CreateOrderViewModel model);
+        Task<IBaseResponse<bool>> Delete(long id);
     }
 }

@@ -21,7 +21,6 @@ namespace Restaurant.DAL.Repositories
         public async Task Create(Comment entity)
         {
             await _db.Comments.AddAsync(entity);
-            await _db.SaveChangesAsync();
         }
 
         public IQueryable<Comment> GetAll()

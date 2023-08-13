@@ -18,19 +18,19 @@ namespace Restaurant.Services.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly IProfileRepository _proFileRepository;
+        private readonly IProfileRepository _profileRepository;
         private readonly IUserRepository _userRepository;
-        private readonly ICartRepository _basketRepository;
+        private readonly ICartRepository _cartRepository;
         private readonly ILogger<AccountService> _logger;
 
         public AccountService(IUserRepository userRepository,
-            ILogger<AccountService> logger, IProfileRepository proFileRepository,
-            ICartRepository basketRepository)
+            ILogger<AccountService> logger, IProfileRepository profileRepository,
+            ICartRepository cartRepository)
         {
             _userRepository = userRepository;
             _logger = logger;
-            _proFileRepository = proFileRepository;
-            _basketRepository = basketRepository;
+            _profileRepository = profileRepository;
+            _cartRepository = cartRepository;
         }
 
         public async Task<BaseResponse<ClaimsIdentity>> Register(RegisterViewModel model)
@@ -60,19 +60,19 @@ namespace Restaurant.Services.Services
                     UserId = user.Id,
                 };
 
-                var basket = new Cart()
+                var cart = new Cart()
                 {
                     UserId = user.Id
                 };
 
-                await _proFileRepository.Create(profile);
-                await _basketRepository.Create(basket);
+                await _profileRepository.Create(profile);
+                await _cartRepository.Create(cart);
                 var result = Authenticate(user);
 
                 return new BaseResponse<ClaimsIdentity>()
                 {
                     Data = result,
-                    Description = "Додано",
+                    Description = "added",
                     StatusCode = StatusCode.OK
                 };
             }

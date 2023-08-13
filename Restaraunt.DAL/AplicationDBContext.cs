@@ -2,12 +2,6 @@
 using Restaurant.Domain.Entity;
 using Restaurant.Domain.Enum;
 using Restaurant.Domain.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Restaurant.DAL
 {
@@ -15,7 +9,7 @@ namespace Restaurant.DAL
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-
+            Database.EnsureCreated();
         }
 
         public DbSet<Dish> Dishes { get; set; }
@@ -125,7 +119,7 @@ namespace Restaurant.DAL
                 builder.ToTable("Profiles").HasKey(x => x.Id);
 
                 builder.Property(x => x.Id).ValueGeneratedOnAdd();
-                builder.Property(x => x.Address).IsRequired(); 
+                builder.Property(x => x.Address).IsRequired(false); 
 
                 builder.HasData(new Profile()
                 {
@@ -138,6 +132,11 @@ namespace Restaurant.DAL
             modelBuilder.Entity<Cart>(builder =>
             {
                 builder.ToTable("Carts").HasKey(x => x.Id);
+                builder.HasData(new Cart()
+                {
+                    Id = 1,
+                    UserId = 1
+                });
 
             });
 
@@ -146,7 +145,7 @@ namespace Restaurant.DAL
                 builder.ToTable("Orders").HasKey(x => x.Id);
 
                 builder.HasOne(r => r.Cart).WithMany(t => t.Orders)
-                    .HasForeignKey(r => r.BasketId);
+                    .HasForeignKey(r => r.CartId);
             });
 
             modelBuilder.Entity<DishPhoto>(builder =>
@@ -156,14 +155,12 @@ namespace Restaurant.DAL
                 builder.Property(x => x.Id).ValueGeneratedOnAdd();
                 builder.Property(x => x.ImageData).IsRequired();
 
-                // Відносні шляхи від wwwroot
                 string relativeImagePath1 = "img/DishPhotos/PizzaPaperoni.jpg";
                 string relativeImagePath2 = "img/DishPhotos/bread.jpg";
                 string relativeImagePath3 = "img/DishPhotos/WineTraverseBay.jpg";
                 string relativeImagePath4 = "img/DishPhotos/BeerCorona.jpg";
                 string relativeImagePath5 = "img/DishPhotos/MongolianBeef.jpg";
 
-                // Прочитати бінарні дані зображень з файлів
                 byte[] imageData1 = System.IO.File.ReadAllBytes(Path.Combine("wwwroot", relativeImagePath1));
                 byte[] imageData2 = System.IO.File.ReadAllBytes(Path.Combine("wwwroot", relativeImagePath2));
                 byte[] imageData3 = System.IO.File.ReadAllBytes(Path.Combine("wwwroot", relativeImagePath3));

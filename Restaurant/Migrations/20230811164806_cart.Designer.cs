@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Restaurant.DAL;
 
@@ -11,9 +12,11 @@ using Restaurant.DAL;
 namespace Restaurant.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230811164806_cart")]
+    partial class cart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,7 +109,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 1L,
                             Category = 0,
-                            DateCreate = new DateTime(2023, 8, 11, 19, 51, 54, 448, DateTimeKind.Local).AddTicks(2052),
+                            DateCreate = new DateTime(2023, 8, 11, 19, 48, 6, 518, DateTimeKind.Local).AddTicks(7978),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Bread",
                             Price = 2500m
@@ -115,7 +118,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 2L,
                             Category = 7,
-                            DateCreate = new DateTime(2023, 8, 11, 19, 51, 54, 448, DateTimeKind.Local).AddTicks(2120),
+                            DateCreate = new DateTime(2023, 8, 11, 19, 48, 6, 518, DateTimeKind.Local).AddTicks(8023),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Wine",
                             Price = 0m
@@ -124,7 +127,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 3L,
                             Category = 3,
-                            DateCreate = new DateTime(2023, 8, 11, 19, 51, 54, 448, DateTimeKind.Local).AddTicks(2123),
+                            DateCreate = new DateTime(2023, 8, 11, 19, 48, 6, 518, DateTimeKind.Local).AddTicks(8025),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Pizza \"Paperoni\" ",
                             Price = 3000m
@@ -133,7 +136,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 4L,
                             Category = 8,
-                            DateCreate = new DateTime(2023, 8, 11, 19, 51, 54, 448, DateTimeKind.Local).AddTicks(2127),
+                            DateCreate = new DateTime(2023, 8, 11, 19, 48, 6, 518, DateTimeKind.Local).AddTicks(8067),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Beer \"Corona\"",
                             Price = 120m
@@ -142,7 +145,7 @@ namespace Restaurant.Migrations
                         {
                             Id = 5L,
                             Category = 1,
-                            DateCreate = new DateTime(2023, 8, 11, 19, 51, 54, 448, DateTimeKind.Local).AddTicks(2131),
+                            DateCreate = new DateTime(2023, 8, 11, 19, 48, 6, 518, DateTimeKind.Local).AddTicks(8069),
                             Description = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
                             Name = "Mongolian Beef",
                             Price = 3000m
@@ -215,8 +218,7 @@ namespace Restaurant.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("CartId")
-                        .IsRequired()
+                    b.Property<long?>("BasketId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Comments")
@@ -257,7 +259,7 @@ namespace Restaurant.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
+                    b.HasIndex("BasketId");
 
                     b.ToTable("Orders", (string)null);
                 });
@@ -364,9 +366,7 @@ namespace Restaurant.Migrations
                 {
                     b.HasOne("Restaurant.Domain.Entity.Cart", "Cart")
                         .WithMany("Orders")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BasketId");
 
                     b.Navigation("Cart");
                 });

@@ -29,8 +29,9 @@ namespace Restaurant.Services.Services
             try
             {
                 var user = await _userRepository.GetAll()
-                    .Include(x => x.Cart)
-                    .FirstOrDefaultAsync(x => x.Name == model.Login);
+                                 .Include(x => x.Cart)
+                                 .FirstOrDefaultAsync(x => x.Name == model.Login);
+
                 if (user == null)
                 {
                     return new BaseResponse<Order>()
@@ -46,7 +47,7 @@ namespace Restaurant.Services.Services
                     LastName = model.LastName,
                     Address = model.Address,
                     DateCreated = DateTime.Now,
-                    BasketId = user.Cart.Id,
+                    CartId = user.Cart.Id,
                     DishId = model.DishId,
                     Phone = model.Phone,
                     Post = model.Post,

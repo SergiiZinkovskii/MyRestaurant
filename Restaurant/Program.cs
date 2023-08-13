@@ -5,13 +5,15 @@ using Restaurant;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.AddJsonFile("local.json");
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Configuration.AddJsonFile("local.json");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connection, b => b.MigrationsAssembly("Restaurant")));
+
 builder.Services.InitializeRepositories();
 builder.Services.InitializeServices();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

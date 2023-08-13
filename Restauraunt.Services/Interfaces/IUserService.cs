@@ -11,9 +11,9 @@ namespace Restaurant.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<IBaseResponse<User>> CreateAsync(UserViewModel model);
-        BaseResponse<Dictionary<int, string>> GetRoles();
-        Task<BaseResponse<IEnumerable<UserViewModel>>> GetUsersAsync();
-        Task<IBaseResponse<bool>> DeleteUserAsync(long id);
+        Task<IResponse<User>> CreateAsync(UserViewModel model);
+        Response<Dictionary<int, string>> GetRoles();
+        Task<Response<IEnumerable<UserViewModel>>> GetUsersAsync();
+        Task<IResponse<bool>> DeleteUserAsync(long id);
     }
 }

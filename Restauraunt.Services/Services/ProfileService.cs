@@ -26,7 +26,7 @@ namespace Restaurant.Services.Services
             _logger = logger;
         }
 
-        public async Task<BaseResponse<ProfileViewModel>> GetProfile(string userName)
+        public async Task<Response<ProfileViewModel>> GetProfile(string userName)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Restaurant.Services.Services
                     })
                     .FirstOrDefaultAsync(x => x.UserName == userName);
 
-                return new BaseResponse<ProfileViewModel>()
+                return new Response<ProfileViewModel>()
                 {
                     Data = profile,
                     StatusCode = StatusCode.OK
@@ -49,7 +49,7 @@ namespace Restaurant.Services.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"[ProfileService.GetProfile] error: {ex.Message}");
-                return new BaseResponse<ProfileViewModel>()
+                return new Response<ProfileViewModel>()
                 {
                     StatusCode = StatusCode.InternalServerError,
                     Description = $"Internal error: {ex.Message}"
@@ -57,7 +57,7 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public async Task<BaseResponse<Profile>> Save(ProfileViewModel model)
+        public async Task<Response<Profile>> Save(ProfileViewModel model)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace Restaurant.Services.Services
 
                 await _profileRepository.Update(profile);
 
-                return new BaseResponse<Profile>()
+                return new Response<Profile>()
                 {
                     Data = profile,
                     Description = "The data has been updated",
@@ -79,7 +79,7 @@ namespace Restaurant.Services.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"[ProfileService.Save] error: {ex.Message}");
-                return new BaseResponse<Profile>()
+                return new Response<Profile>()
                 {
                     StatusCode = StatusCode.InternalServerError,
                     Description = $"internal error: {ex.Message}"

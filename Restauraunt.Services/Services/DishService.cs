@@ -20,7 +20,7 @@ namespace Restaurant.Services.Services
             _commentRepository = commentRepository;
         }
 
-        public BaseResponse<Dictionary<int, string>> GetTypes()
+        public Response<Dictionary<int, string>> GetTypes()
         {
             try
             {
@@ -28,7 +28,7 @@ namespace Restaurant.Services.Services
                         typeof(Category)))
                     .ToDictionary(k => (int)k, t => t.GetDisplayName());
 
-                return new BaseResponse<Dictionary<int, string>>()
+                return new Response<Dictionary<int, string>>()
                 {
                     Data = types,
                     StatusCode = StatusCode.OK
@@ -37,7 +37,7 @@ namespace Restaurant.Services.Services
 
             catch (Exception ex)
             {
-                return new BaseResponse<Dictionary<int, string>>()
+                return new Response<Dictionary<int, string>>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError
@@ -45,7 +45,7 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public IBaseResponse<List<Dish>> GetDishes()
+        public IResponse<List<Dish>> GetDishes()
         {
             try
             {
@@ -56,14 +56,14 @@ namespace Restaurant.Services.Services
 
                 if (!dishes.Any())
                 {
-                    return new BaseResponse<List<Dish>>()
+                    return new Response<List<Dish>>()
                     {
                         Description = "We find 0 elements",
                         StatusCode = StatusCode.OK
                     };
                 }
 
-                return new BaseResponse<List<Dish>>()
+                return new Response<List<Dish>>()
                 {
                     Data = dishes,
                     StatusCode = StatusCode.OK
@@ -71,7 +71,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<List<Dish>>()
+                return new Response<List<Dish>>()
                 {
                     Description = $"[GetProducts] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError
@@ -79,7 +79,7 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public async Task<IBaseResponse<Dish>> Create(DishViewModel model, List<byte[]> imageDataList)
+        public async Task<IResponse<Dish>> Create(DishViewModel model, List<byte[]> imageDataList)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace Restaurant.Services.Services
 
                 await _dishRepository.Create(dish);
 
-                return new BaseResponse<Dish>()
+                return new Response<Dish>()
                 {
                     StatusCode = StatusCode.OK,
                     Data = dish
@@ -112,7 +112,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<Dish>()
+                return new Response<Dish>()
                 {
                     Description = $"[CreateAsync] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError
@@ -143,9 +143,9 @@ namespace Restaurant.Services.Services
             };
         }
 
-        public async Task<BaseResponse<Dictionary<long, string>>> GetOneDishAsync(string term)
+        public async Task<Response<Dictionary<long, string>>> GetOneDishAsync(string term)
         {
-            var baseResponse = new BaseResponse<Dictionary<long, string>>();
+            var baseResponse = new Response<Dictionary<long, string>>();
             try
             {
                 var products = await _dishRepository.GetAll()
@@ -166,7 +166,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<Dictionary<long, string>>()
+                return new Response<Dictionary<long, string>>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError
@@ -174,14 +174,14 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public async Task<IBaseResponse<bool>> DeleteDish(long id)
+        public async Task<IResponse<bool>> DeleteDish(long id)
         {
             try
             {
                 var product = await _dishRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
                 if (product == null)
                 {
-                    return new BaseResponse<bool>()
+                    return new Response<bool>()
                     {
                         Description = "Entity not found",
                         StatusCode = StatusCode.UserNotFound,
@@ -191,7 +191,7 @@ namespace Restaurant.Services.Services
 
                 await _dishRepository.Delete(product);
 
-                return new BaseResponse<bool>()
+                return new Response<bool>()
                 {
                     Data = true,
                     StatusCode = StatusCode.OK
@@ -199,7 +199,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<bool>()
+                return new Response<bool>()
                 {
                     Description = $"[DeleteDish] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError
@@ -207,14 +207,14 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public async Task<IBaseResponse<Dish>> Edit(DishViewModel model, long Id)
+        public async Task<IResponse<Dish>> Edit(DishViewModel model, long Id)
         {
             try
             {
                 var dish = await _dishRepository.GetAll().FirstOrDefaultAsync(x => x.Id == Id);
                 if (dish == null)
                 {
-                    return new BaseResponse<Dish>()
+                    return new Response<Dish>()
                     {
                         Description = "Dish not found",
                         StatusCode = StatusCode.EntityNotFiund
@@ -230,7 +230,7 @@ namespace Restaurant.Services.Services
                 await _dishRepository.Update(dish);
 
 
-                return new BaseResponse<Dish>()
+                return new Response<Dish>()
                 {
                     Data = dish,
                     StatusCode = StatusCode.OK,
@@ -239,7 +239,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<Dish>()
+                return new Response<Dish>()
                 {
                     Description = $"[Edit] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError

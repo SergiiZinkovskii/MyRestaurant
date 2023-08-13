@@ -24,7 +24,7 @@ namespace Restaurant.Services.Services
             _orderRepository = orderRepository;
         }
 
-        public async Task<IBaseResponse<Order>> Create(CreateOrderViewModel model)
+        public async Task<IResponse<Order>> Create(CreateOrderViewModel model)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace Restaurant.Services.Services
 
                 if (user == null)
                 {
-                    return new BaseResponse<Order>()
+                    return new Response<Order>()
                     {
                         Description = "User Not Found",
                         StatusCode = StatusCode.UserNotFound
@@ -57,7 +57,7 @@ namespace Restaurant.Services.Services
 
                 await _orderRepository.Create(order);
 
-                return new BaseResponse<Order>()
+                return new Response<Order>()
                 {
                     Description = "Order created",
                     StatusCode = StatusCode.OK
@@ -65,7 +65,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<Order>()
+                return new Response<Order>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError
@@ -73,7 +73,7 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public async Task<IBaseResponse<bool>> Delete(long id)
+        public async Task<IResponse<bool>> Delete(long id)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace Restaurant.Services.Services
 
                 if (order == null)
                 {
-                    return new BaseResponse<bool>()
+                    return new Response<bool>()
                     {
                         StatusCode = StatusCode.OrderNotFound,
                         Description = "Order not found"
@@ -91,7 +91,7 @@ namespace Restaurant.Services.Services
                 }
 
                 await _orderRepository.Delete(order);
-                return new BaseResponse<bool>()
+                return new Response<bool>()
                 {
                     StatusCode = StatusCode.OK,
                     Description = "Order deleted"
@@ -99,7 +99,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<bool>()
+                return new Response<bool>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError

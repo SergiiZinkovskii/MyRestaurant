@@ -27,7 +27,7 @@ namespace Restaurant.Services.Services
             _orderRepository = orderRepository;
         }
 
-        public async Task<IBaseResponse<IEnumerable<OrderViewModel>>> GetAllItems()
+        public async Task<IResponse<IEnumerable<OrderViewModel>>> GetAllItems()
         {
             try
             {
@@ -55,7 +55,7 @@ namespace Restaurant.Services.Services
                                    Quantity = order.Quantity
                                };
 
-                return new BaseResponse<IEnumerable<OrderViewModel>>()
+                return new Response<IEnumerable<OrderViewModel>>()
                 {
                     Data = response,
                     StatusCode = StatusCode.OK
@@ -63,7 +63,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<IEnumerable<OrderViewModel>>()
+                return new Response<IEnumerable<OrderViewModel>>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError
@@ -72,7 +72,7 @@ namespace Restaurant.Services.Services
         }
 
 
-        public async Task<IBaseResponse<IEnumerable<OrderViewModel>>> GetItems(string userName)
+        public async Task<IResponse<IEnumerable<OrderViewModel>>> GetItems(string userName)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace Restaurant.Services.Services
 
                 if (user == null)
                 {
-                    return new BaseResponse<IEnumerable<OrderViewModel>>()
+                    return new Response<IEnumerable<OrderViewModel>>()
                     {
                         Description = "Entity not found",
                         StatusCode = StatusCode.UserNotFound
@@ -107,7 +107,7 @@ namespace Restaurant.Services.Services
                                    Photo = photo,
                                };
 
-                return new BaseResponse<IEnumerable<OrderViewModel>>()
+                return new Response<IEnumerable<OrderViewModel>>()
                 {
                     Data = response,
                     StatusCode = StatusCode.OK
@@ -115,7 +115,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<IEnumerable<OrderViewModel>>()
+                return new Response<IEnumerable<OrderViewModel>>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError
@@ -124,7 +124,7 @@ namespace Restaurant.Services.Services
         }
 
 
-        public async Task<IBaseResponse<OrderViewModel>> GetItem(string userName, long id)
+        public async Task<IResponse<OrderViewModel>> GetItem(string userName, long id)
         {
             try
             {
@@ -135,7 +135,7 @@ namespace Restaurant.Services.Services
 
                 if (user == null)
                 {
-                    return new BaseResponse<OrderViewModel>()
+                    return new Response<OrderViewModel>()
                     {
                         Description = "Користувача не знайдено",
                         StatusCode = StatusCode.UserNotFound
@@ -145,7 +145,7 @@ namespace Restaurant.Services.Services
                 var orders = user.Cart?.Orders.Where(x => x.Id == id).ToList();
                 if (orders == null || orders.Count == 0)
                 {
-                    return new BaseResponse<OrderViewModel>()
+                    return new Response<OrderViewModel>()
                     {
                         Description = "Замовлень немає",
                         StatusCode = StatusCode.OrderNotFound
@@ -172,7 +172,7 @@ namespace Restaurant.Services.Services
                                     Payment = p.Payment,
                                 }).FirstOrDefault();
 
-                return new BaseResponse<OrderViewModel>()
+                return new Response<OrderViewModel>()
                 {
                     Data = response,
                     StatusCode = StatusCode.OK
@@ -180,7 +180,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<OrderViewModel>()
+                return new Response<OrderViewModel>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError
@@ -188,7 +188,7 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public async Task<IBaseResponse<OrderViewModel>> GetItemByAdmin(long id)
+        public async Task<IResponse<OrderViewModel>> GetItemByAdmin(long id)
         {
             try
             {
@@ -197,7 +197,7 @@ namespace Restaurant.Services.Services
 
                 if (order == null)
                 {
-                    return new BaseResponse<OrderViewModel>()
+                    return new Response<OrderViewModel>()
                     {
                         Description = "Order",
                         StatusCode = StatusCode.OrderNotFound
@@ -209,7 +209,7 @@ namespace Restaurant.Services.Services
 
                 if (product == null)
                 {
-                    return new BaseResponse<OrderViewModel>()
+                    return new Response<OrderViewModel>()
                     {
                         Description = "Enyity no found",
                         StatusCode = StatusCode.EntityNotFiund
@@ -231,7 +231,7 @@ namespace Restaurant.Services.Services
                     Quantity = order.Quantity,
                 };
 
-                return new BaseResponse<OrderViewModel>()
+                return new Response<OrderViewModel>()
                 {
                     Data = response,
                     StatusCode = StatusCode.OK
@@ -239,7 +239,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<OrderViewModel>()
+                return new Response<OrderViewModel>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError

@@ -33,14 +33,14 @@ namespace Restaurant.Services.Services
             _cartRepository = cartRepository;
         }
 
-        public async Task<BaseResponse<ClaimsIdentity>> Register(RegisterViewModel model)
+        public async Task<Response<ClaimsIdentity>> Register(RegisterViewModel model)
         {
             try
             {
                 var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Name == model.Name);
                 if (user != null)
                 {
-                    return new BaseResponse<ClaimsIdentity>()
+                    return new Response<ClaimsIdentity>()
                     {
                         Description = "User with this login or password already exists",
                     };
@@ -69,7 +69,7 @@ namespace Restaurant.Services.Services
                 await _cartRepository.Create(cart);
                 var result = Authenticate(user);
 
-                return new BaseResponse<ClaimsIdentity>()
+                return new Response<ClaimsIdentity>()
                 {
                     Data = result,
                     Description = "added",
@@ -79,7 +79,7 @@ namespace Restaurant.Services.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"[Register]: {ex.Message}");
-                return new BaseResponse<ClaimsIdentity>()
+                return new Response<ClaimsIdentity>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError
@@ -87,14 +87,14 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public async Task<BaseResponse<ClaimsIdentity>> Login(LoginViewModel model)
+        public async Task<Response<ClaimsIdentity>> Login(LoginViewModel model)
         {
             try
             {
                 var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Name == model.Name);
                 if (user == null)
                 {
-                    return new BaseResponse<ClaimsIdentity>()
+                    return new Response<ClaimsIdentity>()
                     {
                         Description = "No user found"
                     };
@@ -102,14 +102,14 @@ namespace Restaurant.Services.Services
 
                 if (user.Password != HashPasswordHelper.HashPassowrd(model.Password))
                 {
-                    return new BaseResponse<ClaimsIdentity>()
+                    return new Response<ClaimsIdentity>()
                     {
                         Description = "Incorrect login or password"
                     };
                 }
                 var result = Authenticate(user);
 
-                return new BaseResponse<ClaimsIdentity>()
+                return new Response<ClaimsIdentity>()
                 {
                     Data = result,
                     StatusCode = StatusCode.OK
@@ -118,7 +118,7 @@ namespace Restaurant.Services.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"[Login]: {ex.Message}");
-                return new BaseResponse<ClaimsIdentity>()
+                return new Response<ClaimsIdentity>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError
@@ -126,14 +126,14 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public async Task<BaseResponse<bool>> ChangePassword(ChangePasswordViewModel model)
+        public async Task<Response<bool>> ChangePassword(ChangePasswordViewModel model)
         {
             try
             {
                 var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Name == model.UserName);
                 if (user == null)
                 {
-                    return new BaseResponse<bool>()
+                    return new Response<bool>()
                     {
                         StatusCode = StatusCode.UserNotFound,
                         Description = "No user found"
@@ -143,7 +143,7 @@ namespace Restaurant.Services.Services
                 user.Password = HashPasswordHelper.HashPassowrd(model.NewPassword);
                 await _userRepository.Update(user);
 
-                return new BaseResponse<bool>()
+                return new Response<bool>()
                 {
                     Data = true,
                     StatusCode = StatusCode.OK,
@@ -154,7 +154,7 @@ namespace Restaurant.Services.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"[ChangePassword]: {ex.Message}");
-                return new BaseResponse<bool>()
+                return new Response<bool>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError

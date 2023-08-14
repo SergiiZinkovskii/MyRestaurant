@@ -20,7 +20,7 @@ namespace Restaurant.DAL.Repositories
         public async Task Create(Cart entity)
         {
             await _db.Carts.AddAsync(entity);
-            await _db.SaveChangesAsync();
+
         }
 
         public IQueryable<Cart> GetAll()
@@ -31,13 +31,13 @@ namespace Restaurant.DAL.Repositories
         public async Task Delete(Cart entity)
         {
             _db.Carts.Remove(entity);
-            await _db.SaveChangesAsync();
+
         }
 
         public async Task<Cart> Update(Cart entity)
         {
             _db.Carts.Update(entity);
-            await _db.SaveChangesAsync();
+
 
             return entity;
         }

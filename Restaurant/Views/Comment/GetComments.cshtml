@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Restaurant.Domain.ViewModel.CommentViewModel>
+
+
+<div id="comments-section">
+
+
+    @foreach (var comment in Model)
+    {
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <p class="card-title">@comment.Author</p>
+                    <p class="card-text">Description: @comment.Text ...</p>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <button class="btn btn-danger delete-comment-btn" data-comment-id="@comment.Id">Delete comment</button>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        
+        $('.delete-comment-btn').click(function () {
+            var commentId = $(this).data('comment-id');
+
+            $.ajax({
+                url: '/Comment/Delete',
+                type: 'POST',
+                data: {
+                    id: commentId
+                },
+                success: function () {
+                    
+                    loadComments();
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>

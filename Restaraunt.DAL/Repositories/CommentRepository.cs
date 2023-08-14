@@ -21,6 +21,7 @@ namespace Restaurant.DAL.Repositories
         public async Task Create(Comment entity)
         {
             await _db.Comments.AddAsync(entity);
+            await _db.SaveChangesAsync();
         }
 
         public IQueryable<Comment> GetAll()
@@ -31,20 +32,21 @@ namespace Restaurant.DAL.Repositories
         public async Task Delete(Comment entity)
         {
             _db.Comments.Remove(entity);
-            await _db.SaveChangesAsync();
+
         }
+
 
         public async Task<Comment> Update(Comment entity)
         {
             _db.Comments.Update(entity);
-            await _db.SaveChangesAsync();
+
 
             return entity;
         }
-        public async Task<List<Comment>> FindAsync(long productId)
+        public async Task<List<Comment>> FindAsync(long dishId)
         {
             return await _db.Comments
-       .Where(c => c.DishId == productId)
+       .Where(c => c.DishId == dishId)
        .ToListAsync();
         }
     }

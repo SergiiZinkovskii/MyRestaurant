@@ -13,6 +13,7 @@ namespace Restaurant.Domain.Entity
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
+        public ICollection<Comment> Comments { get; set; }
         public DateTime DateCreate { get; set; }
         public Category Category { get; set; }
         public ICollection<DishPhoto> DishPhotos { get; set; }

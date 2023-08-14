@@ -6,7 +6,7 @@
 }
 
 <form id="dish-form" asp-action="Edit" enctype="multipart/form-data">
-    <input type="hidden" id="dishtId" value="@Model.Id" />
+    <input type="hidden" id="dishId" value="@Model.Id" />
     <div class="row">
         <div class="col-md-8 text-center">
             <img class="main-image" style="max-width: 100%;" src="data:image/jpeg;base64,@Convert.ToBase64String(Model?.Photos.FirstOrDefault() ?? Array.Empty<byte>())" alt="@Model.Name" />
@@ -84,6 +84,17 @@
 </form>
 
 
+<div id="comments-section">
+    <h4>Clients feedback</h4>
+    <div id="comments-list" style="font-size: small"></div> 
+    <br />
+    <form id="comment-form">
+        <div class="form-group">
+            <textarea id="comment-text" class="form-control" rows="3" placeholder="Leave your feedback about our product"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add comment</button>
+    </form>
+</div>
 
 @section pageScripts
     {
@@ -124,7 +135,63 @@
                 });
             }
 
-           
+            var dishId = '@Model.Id';
+
+            $(function () {
+                
+                loadComments();
+
+                $('#comment-form').on('submit', function (e) {
+                    e.preventDefault();
+
+                    var commentText = $('#comment-text').val();
+
+                    $.ajax({
+                        url: '/Comment/AddComment/' + dishId,
+                        type: 'POST',
+                        data: {
+                            dishId: dishId,
+                            text: commentText
+                        },
+                        success: function () {
+                            
+                            $('#comment-text').val('');
+
+                            loadComments();
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
+                });
+            });
+
+            function loadComments() {
+                var dishId = $('#dishId').val();
+
+                
+                var getCommentsPromise = new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: '/Comment/GetComments/' + dishId,
+                        type: 'POST',
+                        success: function (data) {
+                            resolve(data);
+                        },
+                        error: function (xhr, status, error) {
+                            reject(error);
+                        }
+                    });
+                });
+
+               
+                getCommentsPromise
+                    .then(function (data) {
+                        $('#comments-list').html(data);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            }
         });
     </script>
 }

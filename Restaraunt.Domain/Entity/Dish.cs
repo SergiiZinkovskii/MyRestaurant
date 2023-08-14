@@ -17,5 +17,7 @@ namespace Restaurant.Domain.Entity
         public DateTime DateCreate { get; set; }
         public Category Category { get; set; }
         public ICollection<DishPhoto> DishPhotos { get; set; }
+        public ICollection<Order> Orders { get; set; }
+        
     }
 }

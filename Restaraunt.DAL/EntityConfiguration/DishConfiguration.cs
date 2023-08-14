@@ -19,6 +19,8 @@ namespace Restaurant.DAL.Configurations
             builder.Property(x => x.Price).IsRequired();
             builder.Property(x => x.Category).IsRequired();
 
+            builder.HasMany(o => o.Orders).WithMany(d => d.Dishes);
+
             builder.HasData(new Dish[]
             {
                 new Dish

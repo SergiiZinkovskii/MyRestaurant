@@ -32,14 +32,14 @@ namespace Restaurant.Services.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IBaseResponse<User>> CreateAsync(UserViewModel model)
+        public async Task<IResponse<User>> CreateAsync(UserViewModel model)
         {
             try
             {
                 var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Name == model.Name);
                 if (user != null)
                 {
-                    return new BaseResponse<User>()
+                    return new Response<User>()
                     {
                         Description = "User wis this password already exist",
                         StatusCode = StatusCode.UserAlreadyExists
@@ -63,7 +63,7 @@ namespace Restaurant.Services.Services
 
                 await _proFileRepository.Create(profile);
 
-                return new BaseResponse<User>()
+                return new Response<User>()
                 {
                     Data = user,
                     Description = "User was added",
@@ -73,7 +73,7 @@ namespace Restaurant.Services.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"[UserService.CreateAsync] error: {ex.Message}");
-                return new BaseResponse<User>()
+                return new Response<User>()
                 {
                     StatusCode = StatusCode.InternalServerError,
                     Description = $"internal error: {ex.Message}"
@@ -81,14 +81,14 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public BaseResponse<Dictionary<int, string>> GetRoles()
+        public Response<Dictionary<int, string>> GetRoles()
         {
             try
             {
                 var roles = ((Role[])Enum.GetValues(typeof(Role)))
                     .ToDictionary(k => (int)k, t => t.GetDisplayName());
 
-                return new BaseResponse<Dictionary<int, string>>()
+                return new Response<Dictionary<int, string>>()
                 {
                     Data = roles,
                     StatusCode = StatusCode.OK
@@ -96,7 +96,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<Dictionary<int, string>>()
+                return new Response<Dictionary<int, string>>()
                 {
                     Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError
@@ -104,7 +104,7 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public async Task<BaseResponse<IEnumerable<UserViewModel>>> GetUsersAsync()
+        public async Task<Response<IEnumerable<UserViewModel>>> GetUsersAsync()
         {
             try
             {
@@ -118,7 +118,7 @@ namespace Restaurant.Services.Services
                     .ToListAsync();
 
                 _logger.LogInformation($"[UserService.GetUsers] getting elements {users.Count}");
-                return new BaseResponse<IEnumerable<UserViewModel>>()
+                return new Response<IEnumerable<UserViewModel>>()
                 {
                     Data = users,
                     StatusCode = StatusCode.OK
@@ -127,7 +127,7 @@ namespace Restaurant.Services.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"[UserSerivce.GetUsers] error: {ex.Message}");
-                return new BaseResponse<IEnumerable<UserViewModel>>()
+                return new Response<IEnumerable<UserViewModel>>()
                 {
                     StatusCode = StatusCode.InternalServerError,
                     Description = $"internal error: {ex.Message}"
@@ -135,14 +135,14 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public async Task<IBaseResponse<bool>> DeleteUserAsync(long id)
+        public async Task<IResponse<bool>> DeleteUserAsync(long id)
         {
             try
             {
                 var user = await _userRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
                 if (user == null)
                 {
-                    return new BaseResponse<bool>
+                    return new Response<bool>
                     {
                         StatusCode = StatusCode.UserNotFound,
                         Data = false
@@ -151,7 +151,7 @@ namespace Restaurant.Services.Services
                 await _userRepository.Delete(user);
                 _logger.LogInformation($"[UserService.DeleteUser] user was deleted");
 
-                return new BaseResponse<bool>
+                return new Response<bool>
                 {
                     StatusCode = StatusCode.OK,
                     Data = true
@@ -160,7 +160,7 @@ namespace Restaurant.Services.Services
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"[UserSerivce.DeleteUser] error: {ex.Message}");
-                return new BaseResponse<bool>()
+                return new Response<bool>()
                 {
                     StatusCode = StatusCode.InternalServerError,
                     Description = $"internal error: {ex.Message}"

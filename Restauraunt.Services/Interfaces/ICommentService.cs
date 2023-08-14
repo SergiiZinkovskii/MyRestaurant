@@ -11,8 +11,8 @@ namespace Restaurant.Services.Interfaces
 {
     public interface ICommentService
     {
-        Task<IBaseResponse<Comment>> CreateAsync(int dishId, string autor, string text, CancellationToken cancellationToken);
-        Task<BaseResponse<IEnumerable<CommentViewModel>>> GetComments(int dishId);
-        Task<IBaseResponse<bool>> Delete(int id);
+        Task<IResponse<Comment>> CreateAsync(int dishId, string autor, string text, CancellationToken cancellationToken);
+        Task<Response<IEnumerable<CommentViewModel>>> GetComments(int dishId);
+        Task<IResponse<bool>> Delete(int id);
     }
 }

@@ -10,9 +10,12 @@ namespace Restaurant.DAL.Configurations
         {
             builder.ToTable("Orders").HasKey(x => x.Id);
 
-            builder.HasOne(r => r.Cart)
-                .WithMany(t => t.Orders)
-                .HasForeignKey(r => r.CartId);
+            builder.HasOne(o => o.Cart)
+                .WithMany(c => c.Orders)
+                .HasForeignKey(o => o.CartId);
+
+            builder.HasMany(o => o.Dishes)
+                .WithMany(d => d.Orders);
         }
     }
 }

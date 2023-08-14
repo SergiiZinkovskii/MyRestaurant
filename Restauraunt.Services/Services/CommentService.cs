@@ -32,7 +32,7 @@ namespace Restaurant.Services.Services
             _dishRepository = dishRepository;
         }
 
-        public async Task<IBaseResponse<Comment>> CreateAsync(int dishId, string author, string text, CancellationToken cancellationToken)
+        public async Task<IResponse<Comment>> CreateAsync(int dishId, string author, string text, CancellationToken cancellationToken)
         {
             var comment = new Comment
             {
@@ -44,7 +44,7 @@ namespace Restaurant.Services.Services
             var dish = await _dishRepository.Find(dishId, cancellationToken);
             if (dish == null)
             {
-                return new BaseResponse<Comment>
+                return new Response<Comment>
                 {
                     Description = "Dish not found",
                     StatusCode = StatusCode.EntityNotFiund
@@ -56,7 +56,7 @@ namespace Restaurant.Services.Services
             await _commentRepository.Create(comment);
             await _unitOfWork.CommitAsync();
 
-            return new BaseResponse<Comment>
+            return new Response<Comment>
             {
                 Description = "Comment added",
                 StatusCode = StatusCode.OK,
@@ -65,14 +65,14 @@ namespace Restaurant.Services.Services
         }
 
 
-        public async Task<IBaseResponse<bool>> Delete(int id)
+        public async Task<IResponse<bool>> Delete(int id)
         {
             try
             {
                 var dish = await _commentRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
                 if (dish == null)
                 {
-                    return new BaseResponse<bool>()
+                    return new Response<bool>()
                     {
                         Description = "Comment not found",
                         StatusCode = StatusCode.UserNotFound,
@@ -83,7 +83,7 @@ namespace Restaurant.Services.Services
                 await _commentRepository.Delete(dish);
                 await _unitOfWork.CommitAsync();
 
-                return new BaseResponse<bool>()
+                return new Response<bool>()
                 {
                     Data = true,
                     StatusCode = StatusCode.OK
@@ -91,7 +91,7 @@ namespace Restaurant.Services.Services
             }
             catch (Exception ex)
             {
-                return new BaseResponse<bool>()
+                return new Response<bool>()
                 {
                     Description = $"[DeleteComment] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError
@@ -102,7 +102,7 @@ namespace Restaurant.Services.Services
 
 
 
-        public async Task<BaseResponse<IEnumerable<CommentViewModel>>> GetComments(int dishId)
+        public async Task<Response<IEnumerable<CommentViewModel>>> GetComments(int dishId)
         {
             var comments = await _commentRepository.GetAll()
                 .Where(c => c.DishId == dishId)
@@ -114,7 +114,7 @@ namespace Restaurant.Services.Services
                 Text = c.Text,
                 Author = c.Author
             });
-            return new BaseResponse<IEnumerable<CommentViewModel>>
+            return new Response<IEnumerable<CommentViewModel>>
             {
                 Data = commentViewModels,
                 Description = "Comment added",

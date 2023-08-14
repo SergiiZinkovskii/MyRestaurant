@@ -9,7 +9,7 @@ namespace Restaurant.Domain.Entity
     public class Order
     {
         public long Id { get; set; }
-        public long? DishId { get; set; }
+        public long DishId { get; set; }
         public DateTime DateCreated { get; set; }
         public string Address { get; set; }
         public string FirstName { get; set; }
@@ -21,5 +21,6 @@ namespace Restaurant.Domain.Entity
         public long? CartId { get; set; }
         public int Quantity { get; set; }
         public virtual Cart Cart { get; set; }
+        public virtual ICollection<Dish> Dishes { get; set; }
     }
 }

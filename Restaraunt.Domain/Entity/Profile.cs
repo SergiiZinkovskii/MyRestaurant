@@ -12,6 +12,6 @@ namespace Restaurant.Domain.Entity
         public byte Age { get; set; }
         public string Address { get; set; }
         public long UserId { get; set; }
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

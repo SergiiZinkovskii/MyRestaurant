@@ -11,7 +11,7 @@ namespace Restaurant.Services.Interfaces
     public interface ICartService
     {
         Task<IResponse<IEnumerable<OrderViewModel>>> GetItems(string userName);
-        Task<IResponse<IEnumerable<OrderViewModel>>> GetAllItems();
+        Task<IResponse<IEnumerable<OrderViewModel>>> GetAllItems(int page, int pageSize);
         Task<IResponse<OrderViewModel>> GetItem(string userName, long id);
         Task<IResponse<OrderViewModel>> GetItemByAdmin(long id);
     }

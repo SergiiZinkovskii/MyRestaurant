@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Order";
     Layout = "_Layout";
+    var page = ViewData["Page"] as int? ?? 1;
+    var pageSize = ViewData["PageSize"] as int? ?? 10;
+    var totalItems = ViewData["TotalItems"] as int? ?? 0;
 }
 
 <div class="container">
@@ -42,13 +45,28 @@
                         <div class="card-footer text-center">
                             <button class="btn btn-primary" onclick="openModal({ url: '/Cart/GetItemByAdmin', data: '@item.Id' })"
                                     data-toggle="ajax-modal" data-target="Modal">
-                                Відкрити
+                                Open
                             </button>
                             <a asp-controller="Order" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
                         </div>
                     </div>
                 </div>
             }
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            @for (int i = 1; i <= (int)Math.Ceiling((double)totalItems / ((int?)pageSize).GetValueOrDefault()); i++)
+                            {
+                                <li class="page-item @(i == page ? "active" : "")">
+                                    <a class="page-link" href="@Url.Action("AdminCartPage", new { page = i, pageSize = pageSize })">@i</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+            </div>
         }
+
     </div>
 </div>

@@ -222,7 +222,7 @@ namespace Restaurant.Services.Services
                     return new Response<Dish>()
                     {
                         Description = "Dish not found",
-                        StatusCode = StatusCode.EntityNotFiund
+                        StatusCode = StatusCode.DishNotFound
                     };
                 }
 

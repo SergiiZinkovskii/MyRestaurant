@@ -14,6 +14,6 @@ namespace Restaurant.Domain.Entity
 
         public long UserId { get; set; }
 
-        public List<Order> Orders { get; set; }
+        public virtual List<Order> Orders { get; set; }
     }
 }

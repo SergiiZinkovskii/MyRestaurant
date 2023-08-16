@@ -25,18 +25,16 @@ namespace Restaurant.Services.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IResponse<IEnumerable<OrderViewModel>>> GetAllItems()
+        public async Task<IResponse<IEnumerable<OrderViewModel>>> GetAllItems(int page, int pageSize)
         {
             try
             {
-                var orders = await _orderRepository.GetAll().ToListAsync();
-
-                var response = from order in orders
-                               join dish in _dishRepository.GetAll() on order.DishId equals dish.Id
-                               join photo in _dishPhotoRepository.GetAll() on dish.Id equals photo.DishId into photos
-                               from photo in photos.DefaultIfEmpty()
-                               select new OrderViewModel()
-                               {
+                var query = from order in _orderRepository.GetAll()
+                            join dish in _dishRepository.GetAll() on order.DishId equals dish.Id
+                            join photo in _dishPhotoRepository.GetAll() on dish.Id equals photo.DishId into photos
+                            from photo in photos.DefaultIfEmpty()
+                            select new OrderViewModel()
+                            {
                                    Id = order.Id,
                                    DishName = dish.Name,
                                    Category = dish.Category.GetDisplayName(),
@@ -51,7 +49,11 @@ namespace Restaurant.Services.Services
                                    Payment = order.Payment,
                                    Comments = order.Comments,
                                    Quantity = order.Quantity
-                               };
+                            };
+
+                var pagedQuery = query.Skip((page - 1) * pageSize).Take(pageSize);
+
+                var response = await pagedQuery.ToListAsync();
 
                 return new Response<IEnumerable<OrderViewModel>>()
                 {
@@ -68,6 +70,7 @@ namespace Restaurant.Services.Services
                 };
             }
         }
+
 
 
         public async Task<IResponse<IEnumerable<OrderViewModel>>> GetItems(string userName)
@@ -210,7 +213,7 @@ namespace Restaurant.Services.Services
                     return new Response<OrderViewModel>()
                     {
                         Description = "Enyity no found",
-                        StatusCode = StatusCode.EntityNotFiund
+                        StatusCode = StatusCode.DishNotFound
                     };
                 }
 

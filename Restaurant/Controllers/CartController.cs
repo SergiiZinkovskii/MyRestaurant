@@ -22,15 +22,23 @@ namespace Restaurant.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> AdminCartPage()
+        public async Task<IActionResult> AdminCartPage(int page = 1, int pageSize = 10)
         {
-            var response = await _cartService.GetAllItems();
+            var response = await _cartService.GetAllItems(page, pageSize);
             if (response.StatusCode == Domain.Enum.StatusCode.OK)
             {
-                return View(response.Data.ToList());
+                var totalItems = response.Data.Count();
+                var orders = response.Data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+                ViewData["Page"] = page;
+                ViewData["PageSize"] = pageSize;
+                ViewData["TotalItems"] = totalItems;
+
+                return View(orders);
             }
             return RedirectToAction("Index", "Home");
         }
+
 
 
         [HttpGet]

@@ -12,6 +12,6 @@ namespace Restaurant.Domain.Entity
         public long DishId { get; set; }
         public string Text { get; set; }
         public string Author { get; set; }
-        public Dish Dish { get; set; }
+        public virtual Dish Dish { get; set; }
     }
 }

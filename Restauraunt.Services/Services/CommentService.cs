@@ -47,7 +47,7 @@ namespace Restaurant.Services.Services
                 return new Response<Comment>
                 {
                     Description = "Dish not found",
-                    StatusCode = StatusCode.EntityNotFiund
+                    StatusCode = StatusCode.DishNotFound
                 };
             }
 

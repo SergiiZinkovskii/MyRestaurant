@@ -74,8 +74,8 @@ namespace Restaurant.Services.Services
                 {
                     return new Response<bool>()
                     {
-                        Description = "Comment not found",
-                        StatusCode = StatusCode.UserNotFound,
+                        Description = "Dish not found",
+                        StatusCode = StatusCode.DishNotFound,
                         Data = false
                     };
                 }

@@ -7,12 +7,7 @@ using Restaurant.Domain.Extensions;
 using Restaurant.Domain.Response;
 using Restaurant.Domain.ViewModel;
 using Restaurant.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Restaurant.Services.Services
 {
@@ -141,7 +136,7 @@ namespace Restaurant.Services.Services
                     return new Response<bool>()
                     {
                         StatusCode = StatusCode.UserNotFound,
-                        Description = "No user found"
+                        Description = "User not found"
                     };
                 }
 

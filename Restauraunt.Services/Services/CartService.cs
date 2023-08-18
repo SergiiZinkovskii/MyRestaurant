@@ -148,7 +148,7 @@ namespace Restaurant.Services.Services
                 {
                     return new Response<OrderViewModel>()
                     {
-                        Description = "Order no found",
+                        Description = "Order not found",
                         StatusCode = StatusCode.OrderNotFound
                     };
                 }
@@ -212,7 +212,7 @@ namespace Restaurant.Services.Services
                 {
                     return new Response<OrderViewModel>()
                     {
-                        Description = "Enyity no found",
+                        Description = "Dish not found",
                         StatusCode = StatusCode.DishNotFound
                     };
                 }

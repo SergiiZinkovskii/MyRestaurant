@@ -12,6 +12,7 @@ namespace Restaurant.Domain.Enum
         UserAlreadyExists = 1,
         DishNotFound = 10,
         OrderNotFound = 20,
+        CartNotFound = 30,
         OK = 200,
         InternalServerError = 500
     }

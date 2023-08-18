@@ -15,13 +15,17 @@ namespace Restaurant.Services.Services
         private readonly IDishRepository _dishRepository;
         private readonly ICommentRepository _commentRepository;
         private readonly IUnitOfWork _unitOfWork;
-        
+        private IDishRepository dishRepository;
+        private ICommentRepository commentRepository;
+
         public DishService(IDishRepository dishRepository, ICommentRepository commentRepository, IUnitOfWork unitOfWork)
         {
             _dishRepository = dishRepository;
             _commentRepository = commentRepository;
             _unitOfWork = unitOfWork;
         }
+
+
 
         public Response<Dictionary<int, string>> GetTypes()
         {
@@ -91,7 +95,7 @@ namespace Restaurant.Services.Services
                     Name = model.Name,
                     Description = model.Description,
                     DateCreate = DateTime.Now,
-                    //Category = Enum.Parse<Category>(model.Category),
+                    Category = Enum.Parse<Category>(model.Category),
                     Price = model.Price,
                     DishPhotos = new List<DishPhoto>()
                 };
@@ -138,7 +142,7 @@ namespace Restaurant.Services.Services
             return new DishViewModel()
             {
                 Id = dish.Id,
-                //DateCreate = dish.DateCreate.ToLongDateString(),
+                DateCreate = dish.DateCreate.ToLongDateString(),
                 Description = dish.Description,
                 Name = dish.Name,
                 Price = dish.Price,
@@ -182,18 +186,18 @@ namespace Restaurant.Services.Services
         {
             try
             {
-                var product = await _dishRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
-                if (product == null)
+                var dish = await _dishRepository.GetAll().FirstOrDefaultAsync(x => x.Id == id);
+                if (dish == null)
                 {
                     return new Response<bool>()
                     {
-                        Description = "Entity not found",
-                        StatusCode = StatusCode.UserNotFound,
+                        Description = "Dish not found",
+                        StatusCode = StatusCode.DishNotFound,
                         Data = false
                     };
                 }
 
-                await _dishRepository.Delete(product);
+                await _dishRepository.Delete(dish);
                 await _unitOfWork.CommitAsync();
 
                 return new Response<bool>()

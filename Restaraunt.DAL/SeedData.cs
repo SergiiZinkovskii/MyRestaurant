@@ -28,24 +28,77 @@ namespace Restaurant.DAL
                 context.Users.AddRange(
                     new User
                     {
+                        Id = 1,
                         Name = "Admin",
                         Password = HashPasswordHelper.HashPassowrd("123456"),
                         Role = Role.Admin
                     },
                     new User
                     {
+                        Id = 2,
                         Name = "Moderator",
                         Password = HashPasswordHelper.HashPassowrd("654321"),
                         Role = Role.Moderator
                     }
                 );
+                context.SaveChanges();
 
                 context.Carts.AddRange((new Cart()
                 {
+
                     UserId = 1
-                }));
+                }
+                ));
                 context.SaveChanges();
 
+
+                context.Dishes.AddRange(
+                   new Dish
+                   {
+                       //Id = 1,
+                       Name = "Bread",
+                       Description = new string('A', 50),
+                       DateCreate = DateTime.Now,
+                       Price = 2500,
+                       Category = Category.Appetizers
+                   },
+                   new Dish
+                   {
+                       //Id = 2,
+                       Name = "Wine",
+                       Description = new string('A', 50),
+                       DateCreate = DateTime.Now,
+                       Category = Category.Beverages
+                   },
+                   new Dish
+                   {
+                       //Id = 3,
+                       Name = "Pizza \"Paperoni\"",
+                       Description = new string('A', 50),
+                       DateCreate = DateTime.Now,
+                       Price = 3000,
+                       Category = Category.Pizza
+                   },
+                   new Dish
+                   {
+                       //Id = 4,
+                       Name = "Beer \"Corona\"",
+                       Description = new string('A', 50),
+                       DateCreate = DateTime.Now,
+                       Price = 120,
+                       Category = Category.AlcoholicBeverages
+                   },
+                   new Dish
+                   {
+                       //Id = 5,
+                       Name = "Mongolian Beef",
+                       Description = new string('A', 50),
+                       DateCreate = DateTime.Now,
+                       Price = 3000,
+                       Category = Category.MainCourses
+                   }
+               );
+                context.SaveChanges();
                 // Seed Dish data
                 string relativeImagePath1 = "img/DishPhotos/PizzaPaperoni.jpg";
                 string relativeImagePath2 = "img/DishPhotos/bread.jpg";
@@ -93,52 +146,7 @@ namespace Restaurant.DAL
                 }
             });
 
-                context.Dishes.AddRange(
-                    new Dish
-                    {
-                        Id = 1,
-                        Name = "Bread",
-                        Description = new string('A', 50),
-                        DateCreate = DateTime.Now,
-                        Price = 2500,
-                        Category = Category.Appetizers
-                    },
-                    new Dish
-                    {
-                        Id = 2,
-                        Name = "Wine",
-                        Description = new string('A', 50),
-                        DateCreate = DateTime.Now,
-                        Category = Category.Beverages
-                    },
-                    new Dish
-                    {
-                        Id = 3,
-                        Name = "Pizza \"Paperoni\"",
-                        Description = new string('A', 50),
-                        DateCreate = DateTime.Now,
-                        Price = 3000,
-                        Category = Category.Pizza
-                    },
-                    new Dish
-                    {
-                        Id = 4,
-                        Name = "Beer \"Corona\"",
-                        Description = new string('A', 50),
-                        DateCreate = DateTime.Now,
-                        Price = 120,
-                        Category = Category.AlcoholicBeverages
-                    },
-                    new Dish
-                    {
-                        Id = 5,
-                        Name = "Mongolian Beef",
-                        Description = new string('A', 50),
-                        DateCreate = DateTime.Now,
-                        Price = 3000,
-                        Category = Category.MainCourses
-                    }
-                );
+               
 
                 // Seed Order data
                 var orders = new List<Order>();

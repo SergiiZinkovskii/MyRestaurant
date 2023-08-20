@@ -71,6 +71,17 @@ namespace Restaurant.Services.Services
             }
         }
 
+        public async Task<int> GetTotalOrderCount()
+        {
+            try
+            {
+                return await _orderRepository.GetAll().CountAsync();
+            }
+            catch (Exception)
+            {
+                return 0; 
+            }
+        }
 
 
         public async Task<IResponse<IEnumerable<OrderViewModel>>> GetItems(string userName)

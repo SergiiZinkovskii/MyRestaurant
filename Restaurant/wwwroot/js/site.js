@@ -1,9 +1,9 @@
 ﻿class App {
-    initProductTypeSelect($element) {
+    initDishTypeSelect($element) {
         let typesUrl = $element.data('types-url');
 
         $element.select2({
-            placeholder: "Оберіть тип",
+            placeholder: "Choose type",
             minimumInputLength: 0,
             allowClear: true,
             dropdownParent: $element.parent(),
@@ -24,12 +24,16 @@
             }
         });
     }
+
+
+
+
 }
 
 window.app = new App();
 
 $(function () {
-    $('.product-type-select').each(function () {
-        app.initProductTypeSelect($(this));
+    $('.dish-type-select').each(function () {
+        app.initDishTypeSelect($(this));
     });
 });

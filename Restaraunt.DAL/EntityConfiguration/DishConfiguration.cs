@@ -67,7 +67,7 @@ namespace Restaurant.DAL.Configurations
                     Price = 3000,
                     Category = Category.MainCourses
                 }
-                
+
             });
         }
     }

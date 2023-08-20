@@ -14,5 +14,6 @@ namespace Restaurant.Services.Interfaces
         Task<IResponse<IEnumerable<OrderViewModel>>> GetAllItems(int page, int pageSize);
         Task<IResponse<OrderViewModel>> GetItem(string userName, long id);
         Task<IResponse<OrderViewModel>> GetItemByAdmin(long id);
+        Task<int> GetTotalOrderCount();
     }
 }

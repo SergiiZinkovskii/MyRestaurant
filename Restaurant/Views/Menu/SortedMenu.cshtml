@@ -3,12 +3,16 @@
     Layout = "_Layout";
 }
 
-<div class="row ">
+<style>
+    .card-img-top {
+        object-fit: cover;
+        height: 200px; 
+    }
+</style>
 
-
+<div class="row">
     <div class="col-md-3">
         <div class="card h-100">
-
             <a asp-controller="Menu" asp-action="GetCategory" asp-route-category="Appetizers"><img src="~/img/categoryImages/Appetizers.jpg" class="card-img-top card-image" /></a>
             <div class="card-body text-center">
                 <h5 class="card-title">Appetizers</h5>

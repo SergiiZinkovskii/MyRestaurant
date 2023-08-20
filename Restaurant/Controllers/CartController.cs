@@ -24,11 +24,12 @@ namespace Restaurant.Controllers
 
         public async Task<IActionResult> AdminCartPage(int page = 1, int pageSize = 10)
         {
+            var totalItems = await _cartService.GetTotalOrderCount();
+
             var response = await _cartService.GetAllItems(page, pageSize);
             if (response.StatusCode == Domain.Enum.StatusCode.OK)
             {
-                var totalItems = response.Data.Count();
-                var orders = response.Data.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+                var orders = response.Data.ToList();
 
                 ViewData["Page"] = page;
                 ViewData["PageSize"] = pageSize;
@@ -38,6 +39,7 @@ namespace Restaurant.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
 
 
 

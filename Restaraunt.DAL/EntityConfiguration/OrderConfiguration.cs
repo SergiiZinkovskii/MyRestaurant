@@ -19,7 +19,7 @@ namespace Restaurant.DAL.Configurations
             builder.HasMany(o => o.Dishes)
                 .WithMany(d => d.Orders);
 
-            // Ініціалізація тестових замовлень
+
             var orders = new List<Order>();
 
             for (int i = 1; i <= 20; i++)
@@ -27,7 +27,7 @@ namespace Restaurant.DAL.Configurations
                 orders.Add(new Order
                 {
                     Id = i,
-                    DishId = 1, 
+                    DishId = 1,
                     DateCreated = DateTime.Now.AddDays(-i),
                     Address = $"Test Address {i}",
                     FirstName = $"First Name {i}",

@@ -1,22 +1,9 @@
-﻿
-
-@model List<Restaurant.Domain.Entity.Dish>
+﻿@model List<Restaurant.Domain.Entity.Dish>
 
 @{
-    ViewBag.Title = "Restaraunt menu";
+    ViewBag.Title = "Restaurant menu";
     Layout = "_Layout";
 }
-
-
-@if (User.IsInRole("Admin"))
-{
-    <div class="card col-md-12" style="margin: 10px;">
-        <div class="card-buttons-group">
-            <button class='btn btn-success' id='addDishtId'>Add</button>
-        </div>
-    </div>
-}
-<div style="padding: 10px;"></div>
 
 <div class="container-fluid">
     <div class="row">
@@ -24,9 +11,9 @@
             <form method="get">
                 <div class="form-group">
                     <label for="sortSelect">Sort by price:</label>
-                    <select id="sortSelect" name="sortOrder" class="form-control" onchange="sortProducts()">
+                    <select id="sortSelect" name="sortOrder" class="form-control" onchange="sortDishes()">
                         <option value="asc">by growth</option>
-                        <option value="desc">by decline </option>
+                        <option value="desc">by decline</option>
                     </select>
                 </div>
             </form>
@@ -38,7 +25,7 @@
 {
     <div class="col-md-8">
         <div class="card-body">
-            <h5 class="card-title text-center">This page is emty :(</h5>
+            <h5 class="card-title text-center">This page is empty :(</h5>
             <p class="card-text">
                 We are making this page
             </p>
@@ -47,7 +34,7 @@
 }
 else
 {
-    <div id="productsContainer" class="row">
+    <div id="dishesContainer" class="row">
         @foreach (var dish in Model)
         {
             <div class="col-md-3">
@@ -57,16 +44,16 @@ else
                         var photo = dish.DishPhotos.FirstOrDefault();
                         if (photo != null && photo.ImageData != null)
                         {
-                            <img style="max-height: 300px; width: contain" src="data:image/jpeg;base64,@Convert.ToBase64String(photo.ImageData)" alt="@dish.Name" />
+                            <img style="height: 200px; width: 100%; object-fit: cover;" src="data:image/jpeg;base64,@Convert.ToBase64String(photo.ImageData)" alt="@dish.Name" />
                         }
                         else
                         {
-                            <img style="max-height: 300px; width: contain" src="https://example.com/default-image.jpg" alt="@dish.Name" />
+                            <img style="height: 200px; width: 100%; object-fit: cover;" src="https://example.com/default-image.jpg" alt="@dish.Name" />
                         }
                     }
                     else
                     {
-                        <img style="max-height: 300px; width: contain" src="https://example.com/default-image.jpg" alt="@dish.Name" />
+                        <img style="height: 200px; width: 100%; object-fit: cover;" src="https://example.com/default-image.jpg" alt="@dish.Name" />
                     }
                     <div class="card-body">
                         <h5 class="card-title">@dish.Name</h5>
@@ -128,10 +115,10 @@ else
             var select = document.getElementById("sortSelect");
             var sortOrder = select.options[select.selectedIndex].value;
 
-            var productsContainer = document.getElementById("dishesContainer");
-            var products = Array.from(dishesContainer.getElementsByClassName("col-md-3"));
+            var dishesContainer = document.getElementById("dishesContainer");
+            var dishes = Array.from(dishesContainer.getElementsByClassName("col-md-3"));
 
-            diahes.sort(function (a, b) {
+            dishes.sort(function (a, b) {
                 var priceA = parseFloat(a.getElementsByClassName('list-group-item')[0].textContent.replace('Price: ', '').replace(' ₴', ''));
                 var priceB = parseFloat(b.getElementsByClassName('list-group-item')[0].textContent.replace('Price: ', '').replace(' ₴', ''));
 
@@ -143,10 +130,8 @@ else
             });
 
             dishes.forEach(function (dish) {
-                productsContainer.appendChild(dish);
+                dishesContainer.appendChild(dish);
             });
         }
-
-
     </script>
 }

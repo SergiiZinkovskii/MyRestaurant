@@ -55,7 +55,7 @@
             <label asp-for="Category" class="col-form-label"></label>
             @if (User.IsInRole("Admin"))
             {
-                <select asp-for="Category" class="form-control product-type-select" data-types-url="@Url.Action("GetTypes", "Menu")"></select>
+                <select asp-for="Category" class="form-control dish-type-select" data-types-url="@Url.Action("GetTypes", "Menu")"></select>
             }
             else
             {

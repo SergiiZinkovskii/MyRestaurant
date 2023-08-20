@@ -1,4 +1,5 @@
-﻿using Restaurant.DAL;
+﻿using Microsoft.AspNetCore.Authorization;
+using Restaurant.DAL;
 using Restaurant.DAL.Interfaces;
 using Restaurant.DAL.Repositories;
 using Restaurant.Services.Interfaces;
@@ -29,7 +30,12 @@ namespace Restaurant
             services.AddScoped<ICommentService, CommentService>();
             services.AddScoped<IDishService,  DishService>();
             services.AddScoped<IAccountService, AccountService>();
-
+            services.AddSingleton<IAuthorizationHandler, AgeRequirementHandler>();
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AlcoholAccess", policy =>
+                    policy.Requirements.Add(new AgeRequirement(18)));
+            });
         }
     }
 }

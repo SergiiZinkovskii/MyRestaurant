@@ -18,57 +18,9 @@ namespace Restaurant.DAL.Configurations
             builder.Property(x => x.DateCreate).IsRequired();
             builder.Property(x => x.Price).IsRequired();
             builder.Property(x => x.Category).IsRequired();
-
             builder.HasMany(o => o.Orders).WithMany(d => d.Dishes);
 
-            builder.HasData(new Dish[]
-            {
-                new Dish
-                {
-                    Id = 1,
-                    Name = "Bread",
-                    Description = new string('A', 50),
-                    DateCreate = DateTime.Now,
-                    Price = 2500,
-                    Category = Category.Appetizers
-                },
-                new Dish
-                {
-                    Id = 2,
-                    Name = "Wine",
-                    Description = new string('A', 50),
-                    DateCreate = DateTime.Now,
-                    Category = Category.Beverages
-                },
-                new Dish
-                {
-                    Id = 3,
-                    Name = "Pizza \"Paperoni\"",
-                    Description = new string('A', 50),
-                    DateCreate = DateTime.Now,
-                    Price = 3000,
-                    Category = Category.Pizza
-                },
-                new Dish
-                {
-                    Id = 4,
-                    Name = "Beer \"Corona\"",
-                    Description = new string('A', 50),
-                    DateCreate = DateTime.Now,
-                    Price = 120,
-                    Category = Category.AlcoholicBeverages
-                },
-                new Dish
-                {
-                    Id = 5,
-                    Name = "Mongolian Beef",
-                    Description = new string('A', 50),
-                    DateCreate = DateTime.Now,
-                    Price = 3000,
-                    Category = Category.MainCourses
-                }
 
-            });
         }
     }
 }

@@ -25,24 +25,6 @@ namespace Restaurant.DAL.Configurations
                 .WithOne(x => x.User)
                 .HasPrincipalKey<User>(x => x.Id)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasData(new User[]
-            {
-                new User()
-                {
-                    Id = 1,
-                    Name = "Admin",
-                    Password = HashPasswordHelper.HashPassowrd("123456"),
-                    Role = Role.Admin
-                },
-                new User()
-                {
-                    Id = 2,
-                    Name = "Moderator",
-                    Password = HashPasswordHelper.HashPassowrd("654321"),
-                    Role = Role.Moderator
-                }
-            });
         }
     }
 }

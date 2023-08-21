@@ -10,11 +10,6 @@ namespace Restaurant.DAL.Configurations
         {
             builder.ToTable("Carts").HasKey(x => x.Id);
 
-            builder.HasData(new Cart()
-            {
-                Id = 1,
-                UserId = 1
-            });
         }
     }
 }

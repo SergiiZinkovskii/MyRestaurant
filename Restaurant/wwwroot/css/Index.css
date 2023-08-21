@@ -1,0 +1,75 @@
+﻿body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.btn-primary {
+    background-color: #d2232a;
+    border-color: #d2232a;
+}
+
+.btn-danger {
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+.btn-warning {
+    background-color: #ff9900;
+    border-color: #ff9900;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #b21e25;
+    border-color: #b21e25;
+}
+
+.btn-danger:hover, .btn-danger:focus {
+    background-color: #292d31;
+    border-color: #292d31;
+}
+
+.btn-warning:hover, .btn-warning:focus {
+    background-color: #e59400;
+    border-color: #e59400;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    color: #6c757d;
+}
+
+.contact-info {
+    background-color: #343a40;
+    border-radius: 10px;
+    padding: 20px;
+    color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+address {
+    margin-bottom: 10px;
+}
+
+    address a {
+        color: #fff;
+        text-decoration: none;
+    }
+
+        address a:hover {
+            text-decoration: underline;
+        }

@@ -28,14 +28,12 @@ namespace Restaurant.DAL
                 context.Users.AddRange(
                     new User
                     {
-                        Id = 1,
                         Name = "Admin",
                         Password = HashPasswordHelper.HashPassowrd("123456"),
                         Role = Role.Admin
                     },
                     new User
                     {
-                        Id = 2,
                         Name = "Moderator",
                         Password = HashPasswordHelper.HashPassowrd("654321"),
                         Role = Role.Moderator
@@ -51,11 +49,10 @@ namespace Restaurant.DAL
                 ));
                 context.SaveChanges();
 
-
+                // Seed Dish data
                 context.Dishes.AddRange(
                    new Dish
                    {
-                       //Id = 1,
                        Name = "Bread",
                        Description = new string('A', 50),
                        DateCreate = DateTime.Now,
@@ -64,7 +61,6 @@ namespace Restaurant.DAL
                    },
                    new Dish
                    {
-                       //Id = 2,
                        Name = "Wine",
                        Description = new string('A', 50),
                        DateCreate = DateTime.Now,
@@ -72,7 +68,6 @@ namespace Restaurant.DAL
                    },
                    new Dish
                    {
-                       //Id = 3,
                        Name = "Pizza \"Paperoni\"",
                        Description = new string('A', 50),
                        DateCreate = DateTime.Now,
@@ -81,7 +76,6 @@ namespace Restaurant.DAL
                    },
                    new Dish
                    {
-                       //Id = 4,
                        Name = "Beer \"Corona\"",
                        Description = new string('A', 50),
                        DateCreate = DateTime.Now,
@@ -90,7 +84,6 @@ namespace Restaurant.DAL
                    },
                    new Dish
                    {
-                       //Id = 5,
                        Name = "Mongolian Beef",
                        Description = new string('A', 50),
                        DateCreate = DateTime.Now,
@@ -99,7 +92,8 @@ namespace Restaurant.DAL
                    }
                );
                 context.SaveChanges();
-                // Seed Dish data
+
+                // Seed DishPhoto data
                 string relativeImagePath1 = "img/DishPhotos/PizzaPaperoni.jpg";
                 string relativeImagePath2 = "img/DishPhotos/bread.jpg";
                 string relativeImagePath3 = "img/DishPhotos/WineTraverseBay.jpg";
@@ -113,34 +107,29 @@ namespace Restaurant.DAL
                 byte[] imageData5 = File.ReadAllBytes(Path.Combine("wwwroot", relativeImagePath5));
 
                 context.DishPhotos.AddRange(new DishPhoto[]
-            {
+                {
                 new DishPhoto
                 {
-                    Id = 1,
                     DishId = 3,
                     ImageData = imageData1
                 },
                 new DishPhoto
                 {
-                    Id = 2,
                     DishId = 1,
                     ImageData = imageData2
                 },
                 new DishPhoto
                 {
-                    Id = 3,
                     DishId = 2,
                     ImageData = imageData3
                 },
                 new DishPhoto
                 {
-                    Id = 4,
                     DishId = 4,
                     ImageData = imageData4
                 },
                 new DishPhoto
                 {
-                    Id = 5,
                     DishId = 5,
                     ImageData = imageData5
                 }
@@ -166,6 +155,7 @@ namespace Restaurant.DAL
                         Comments = $"Test Comment {i}",
                         CartId = 1,
                         Quantity = i
+                        
                     });
                 }
 

@@ -17,13 +17,6 @@ namespace Restaurant.DAL.Configurations
                 .WithOne(x => x.Profile)
                 .HasForeignKey<Profile>(x => x.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasData(new Profile()
-            {
-                Id = 1,
-                UserId = 1,
-                Address = "123 Main Street"
-            });
         }
     }
 }

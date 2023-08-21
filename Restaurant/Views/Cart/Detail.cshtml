@@ -5,14 +5,14 @@
     Layout = "_Layout";
 }
 
-<div class="container">
+<div class="container mt-5">
     <div class="row">
         @if (Model == null || Model.Count == 0)
         {
             <div class="col-md-12 text-center">
-                <div class="card mt-5">
+                <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Order list is empty :(</h5>
+                        <h5 class="card-title">Your cart is empty</h5>
                     </div>
                 </div>
             </div>
@@ -21,17 +21,13 @@
         {
             @foreach (var item in Model)
             {
-                <div class="col-md-4 mt-4">
+                <div class="col-md-4 mb-4">
                     <div class="card">
                         <div class="card-header">
-                            @if (item.Photo != null)
-                            {
-                                <img src="data:image/jpeg;base64,@Convert.ToBase64String(item.Photo?.ImageData ?? Array.Empty<byte>())" class="card-img-top" alt="@item.DishName" />
-                            }
-                            else
-                            {
-                                <img src="https://example.com/default-image.jpg" class="card-img-top" alt="@item.DishName" />
-                            }
+                            <img src="@(item.Photo != null ?
+                                          "data:image/jpeg;base64," + Convert.ToBase64String(item.Photo?.ImageData ?? Array.Empty<byte>()) :
+                                          "https://example.com/default-image.jpg")"
+                                 class="card-img-top" alt="@item.DishName" />
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">@item.DishName</h5>
@@ -40,12 +36,13 @@
                             <p class="card-text">Quantity: @item.Quantity</p>
                         </div>
                         <div class="card-footer text-center">
-                            <button class="btn btn-primary" onclick="openModal({ url: '/Cart/GetItem', data: '@item.Id' })"
+                            <button class="btn btn-primary"
+                                    onclick="openModal({ url: '/Cart/GetItem', data: '@item.Id' })"
                                     data-toggle="ajax-modal" data-target="Modal">
                                 Open
                             </button>
                             <a asp-controller="Order" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                        </div
+                        </div>
                     </div>
                 </div>
             }

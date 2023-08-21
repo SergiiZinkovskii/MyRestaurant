@@ -34,6 +34,11 @@
                                     <h2 class="btn btn-danger btn-lg float-left"><a asp-controller="Account" target="_blank" asp-action="Login">To login window</a></h2>
                                 </div>
                                 <button class="btn btn-success btn-lg float-right" type="submit">Confirm</button>
+                                <div class="form-group">
+                                    <label asp-for="DateOfBirth">Date of Birth</label>
+                                    <input asp-for="DateOfBirth" class="form-control" type="date">
+                                    <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                </div>
                             </form>
                         </div>
                     </div>

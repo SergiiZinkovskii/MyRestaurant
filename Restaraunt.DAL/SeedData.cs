@@ -30,13 +30,15 @@ namespace Restaurant.DAL
                     {
                         Name = "Admin",
                         Password = HashPasswordHelper.HashPassowrd("123456"),
-                        Role = Role.Admin
+                        Role = Role.Admin,
+                        DateOfBirth = DateTime.Now.AddYears(-20)
                     },
                     new User
                     {
                         Name = "Moderator",
                         Password = HashPasswordHelper.HashPassowrd("654321"),
-                        Role = Role.Moderator
+                        Role = Role.Moderator,
+                        DateOfBirth = DateTime.Now.AddYears(-20)
                     }
                 );
                 context.SaveChanges();

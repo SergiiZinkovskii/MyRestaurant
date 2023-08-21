@@ -166,12 +166,16 @@ namespace Restaurant.Services.Services
         private ClaimsIdentity Authenticate(User user)
         {
             var claims = new List<Claim>
-            {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Name),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString())
-            };
+    {
+        new Claim(ClaimsIdentity.DefaultNameClaimType, user.Name),
+        new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.ToString()),
+        new Claim(ClaimTypes.DateOfBirth, user.DateOfBirth.ToString("yyyy-MM-dd")),
+
+    };
+
             return new ClaimsIdentity(claims, "ApplicationCookie",
                 ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
         }
+
     }
 }

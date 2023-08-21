@@ -23,5 +23,9 @@ namespace Restaurant.Domain.ViewModel
         [Required(ErrorMessage = "Confirm password")]
         [Compare("Password", ErrorMessage = "Passwords areeredo not match")]
         public string PasswordConfirm { get; set; }
+
+        [Required(ErrorMessage = "Enter date of birth")]
+        [DataType(DataType.Date)]
+        public DateTime DateOfBirth { get; set; }
     }
 }

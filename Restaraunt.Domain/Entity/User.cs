@@ -1,9 +1,7 @@
 ﻿using Restaurant.Domain.Enum;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace Restaurant.Domain.Entity
 {
@@ -15,5 +13,7 @@ namespace Restaurant.Domain.Entity
         public Role Role { get; set; }
         public virtual Profile Profile { get; set; }
         public virtual Cart Cart { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        
     }
 }

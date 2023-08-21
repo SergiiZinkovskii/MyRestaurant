@@ -17,6 +17,7 @@ namespace Restaurant.Controllers
             _dishService = dishService;
         }
 
+        [Authorize(Policy = "AlcoholAccess")]
         [HttpGet]
         public IActionResult GetDishes()
         {
@@ -26,7 +27,7 @@ namespace Restaurant.Controllers
                 : View("Error", $"{response.Description}");
         }
 
-
+        
         [HttpGet]
         public IActionResult GetCategory(string category)
         {

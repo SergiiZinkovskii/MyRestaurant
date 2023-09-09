@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Authentication
+
+
+@model IEnumerable<AuthenticationScheme>
+
+<h2>External Login</h2>
+
+<p>Log in using your external account:</p>
+
+<div>
+    <ul>
+        @foreach (var scheme in Model)
+        {
+            <li>
+                <a asp-controller="Account" asp-action="ExternalLogin" asp-route-provider="@scheme.Name" asp-route-returnUrl="https://localhost:7259/">
+                    Log in with @scheme.DisplayName
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
+<p>
+    <a asp-controller="Account" asp-action="Login">Back to Login</a>
+</p>

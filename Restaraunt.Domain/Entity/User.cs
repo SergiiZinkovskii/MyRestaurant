@@ -1,7 +1,4 @@
 ﻿using Restaurant.Domain.Enum;
-using System;
-using System.Collections.Generic;
-using System.Security.Claims;
 
 namespace Restaurant.Domain.Entity
 {

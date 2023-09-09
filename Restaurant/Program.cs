@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Restaurant.DAL;
 using Restaurant;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using SignalRMVC.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.InitializeRepositories();
 builder.Services.InitializeServices();
+builder.Services.AddSignalR();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -42,6 +44,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapHub<ChatHub>("/chatHub");
 using (var scope = app.Services.CreateScope())
 {
     var serviceProvider = scope.ServiceProvider;

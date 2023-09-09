@@ -1,0 +1,45 @@
+﻿
+@using Restaurant.Domain.ViewModel;
+@model ChatViewModel
+
+
+<div class="container">
+    <h1>Chat</h1>
+    <div id="chat">
+        <ul id="messages"></ul>
+        <input type="text" id="messageInput" autocomplete="off" placeholder="Message" />
+        <button id="sendButton">Send</button>
+    </div>
+</div>
+
+@section pageScripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.10/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chatHub")
+            .build();
+
+        connection.start().then(function () {
+            console.log("Connected to chat hub");
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        document.getElementById("sendButton").addEventListener("click", function (event) {
+            const user = '@Model.Author';
+            const message = document.getElementById("messageInput").value;
+
+            connection.invoke("SendMessage", user, message).catch(function (err) {
+                return console.error(err.toString());
+            });
+
+            event.preventDefault();
+        });
+
+        connection.on("ReceiveMessage", function (user, message) {
+            const li = document.createElement("li");
+            li.textContent = `${user}: ${message}`;
+            document.getElementById("messages").appendChild(li);
+        });
+    </script>
+}

@@ -8,9 +8,14 @@ namespace Restaurant.Controllers
         public IActionResult Chat()
         {
             var model = new ChatViewModel();
-            var user = model.Author;
-            if (User.Identity.IsAuthenticated) { user = User.Identity.Name; }
-            else { user = "User"; }
+            if (User.Identity.IsAuthenticated)
+            {
+                model.Author = User.Identity.Name;
+            }
+            else
+            {
+                model.Author = "User";
+            }
             return View(model);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using Restaurant.DAL.Interfaces;
 using Restaurant.DAL.Repositories;
 using Restaurant.Domain.Entity;
@@ -7,6 +8,7 @@ using Restaurant.Domain.Extensions;
 using Restaurant.Domain.Response;
 using Restaurant.Domain.ViewModel;
 using Restaurant.Services.Interfaces;
+
 
 namespace Restaurant.Services.Services
 {
@@ -52,39 +54,59 @@ namespace Restaurant.Services.Services
             }
         }
 
-        public IResponse<List<Dish>> GetDishes()
+        public async Task<IResponse<IEnumerable<Dish>>> GetDishes(int page, int pageSize)
         {
             try
             {
-                
-                var dishes = _dishRepository.GetAll()
-                    .Include(p => p.DishPhotos)
-                    .ToList();
+                var query = _dishRepository.GetAll().Include(p => p.DishPhotos); 
 
-                if (!dishes.Any())
-                {
-                    return new Response<List<Dish>>()
-                    {
-                        Description = "We find 0 elements",
-                        StatusCode = StatusCode.OK
-                    };
-                }
+                var pagedQuery = query.Skip((page - 1) * pageSize).Take(pageSize);
 
-                return new Response<List<Dish>>()
+                var response = await pagedQuery.ToListAsync();
+
+                return new Response<IEnumerable<Dish>>()
                 {
-                    Data = dishes,
+                    Data = response,
                     StatusCode = StatusCode.OK
                 };
             }
             catch (Exception ex)
             {
-                return new Response<List<Dish>>()
+                return new Response<IEnumerable<Dish>>()
                 {
-                    Description = $"[GetProducts] : {ex.Message}",
+                    Description = ex.Message,
                     StatusCode = StatusCode.InternalServerError
                 };
             }
         }
+
+        public async Task<IResponse<IEnumerable<Dish>>> GetDishes(string category, int page, int pageSize)
+        {
+            try
+            {
+                var query = _dishRepository.GetAll().Where(item => item.Category.ToString() == category).Include(p => p.DishPhotos);
+
+                var pagedQuery = query.Skip((page - 1) * pageSize).Take(pageSize);
+
+                var response = await pagedQuery.ToListAsync();
+
+                return new Response<IEnumerable<Dish>>()
+                {
+                    Data = response,
+                    StatusCode = StatusCode.OK
+                };
+            }
+            catch (Exception ex)
+            {
+                return new Response<IEnumerable<Dish>>()
+                {
+                    Description = ex.Message,
+                    StatusCode = StatusCode.InternalServerError
+                };
+            }
+        }
+
+
 
         public async Task<IResponse<Dish>> Create(DishViewModel model, List<byte[]> imageDataList)
         {
@@ -254,6 +276,28 @@ namespace Restaurant.Services.Services
                     Description = $"[Edit] : {ex.Message}",
                     StatusCode = StatusCode.InternalServerError
                 };
+            }
+        }
+        public async Task<int> GetTotalDishCount()
+        {
+            try
+            {
+                return await _dishRepository.GetAll().CountAsync();
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+        public async Task<int> GetTotalDishCount(string category)
+        {
+            try
+            {
+                return await _dishRepository.GetAll().CountAsync(item => item.Category.ToString() == category);
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
     }

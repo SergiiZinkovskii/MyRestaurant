@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Restaurant.Domain.Response;
 using Restaurant.Domain.ViewModel;
 using Restaurant.Services.Interfaces;
+
 
 namespace Restaurant.Controllers
 {
@@ -19,24 +19,50 @@ namespace Restaurant.Controllers
 
         [Authorize(Policy = "AlcoholAccess")]
         [HttpGet]
-        public IActionResult GetDishes()
+        public async Task<IActionResult> GetDishes(int page = 1, int pageSize = 10)
         {
-            var response = _dishService.GetDishes();
-            return response.StatusCode == Domain.Enum.StatusCode.OK
-                ? View(response.Data)
-                : View("Error", $"{response.Description}");
+            var totalItems = await _dishService.GetTotalDishCount(); 
+
+            var response = await _dishService.GetDishes(page, pageSize); 
+
+            if (response.StatusCode == Domain.Enum.StatusCode.OK)
+            {
+                var dishes = response.Data.ToList();
+
+                ViewData["Page"] = page;
+                ViewData["PageSize"] = pageSize;
+                ViewData["TotalItems"] = totalItems;
+
+                return View(dishes);
+            }
+            return RedirectToAction("Index", "Home");
         }
 
-        
         [HttpGet]
-        public IActionResult GetCategory(string category)
+        public async Task <IActionResult> GetCategory(string category, int page = 1, int pageSize = 10)
         {
-            var response = _dishService.GetDishes();
-            var list = response.Data;
-            if (response.StatusCode != Domain.Enum.StatusCode.OK) return View("Error", $"{response.Description}");
-            var newList = list.Where(item => item.Category.ToString() == category).ToList();
-            return View("GetDishes", newList);
+            var totalItems = await _dishService.GetTotalDishCount(category); 
+
+            var response = await _dishService.GetDishes(category, page, pageSize); 
+
+            if (response.StatusCode == Domain.Enum.StatusCode.OK)
+            {
+                var allDishes = response.Data.ToList();
+
+                
+                var filteredDishes = allDishes.Where(item => item.Category.ToString() == category).ToList();
+
+                
+                ViewData["Page"] = page;
+                ViewData["PageSize"] = pageSize;
+                ViewData["TotalItems"] = totalItems;
+
+                return View("GetDishes", filteredDishes);
+            }
+
+            return RedirectToAction("Index", "Home");
         }
+
 
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)

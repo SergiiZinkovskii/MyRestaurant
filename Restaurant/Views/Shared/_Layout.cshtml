@@ -32,14 +32,13 @@
                         <a class="nav-link" asp-controller="Chat" asp-action="Chat">Chat to order</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Site navigation</a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="#">Action</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
-                    </ul>
                     @if (!User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item dropdown">
@@ -52,12 +51,16 @@
                             </ul>
                         </li>
                     }
+                </ul>
                     @if (User.IsInRole("Admin"))
                     {
                         <ul class="navbar-nav me-auto mb-2 mb-md-0">
                             <li class="nav-item dropdown">
                                 <a class="nav-link active text-white" asp-controller="User" asp-action="GetUsers">Admin</a>
                             </li>
+                        <li class="nav-item dropdown">
+                            <a asp-controller="Menu" asp-action="Save" class="nav-link active text-white">Add Dish</a>
+                        </li>
                             <li class="nav-item dropdown" style="padding: 0 20px 0 20px">
                                 <a class="nav-link active text-white" asp-controller="Cart" asp-action="AdminCartPage">Your orders</a>
                             </li>

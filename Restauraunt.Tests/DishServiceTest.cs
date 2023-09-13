@@ -172,7 +172,7 @@ namespace Restauraunt.Tests
                 .Returns(dishes.AsQueryable());
 
             // Act
-            var result = _dishService.GetDishes();
+            var result = _dishService.GetDishes(1, 10);
 
             // Assert
             result.StatusCode.Should().Be(StatusCode.OK);

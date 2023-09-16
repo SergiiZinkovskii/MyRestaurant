@@ -6,41 +6,37 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
-            <div class="text-center">
-                <h1 class="display-4">Welcome to Our Restaurant</h1>
-                <p class="lead">Indulge in the flavors of our exquisite dishes.</p>
-                <a class="btn btn-primary" asp-controller="Menu" asp-action="GetDishes">
-                    View Menu
+        <div class="col-md-4">
+            <div class="card h-100">
+                <a class="card-img-top" asp-controller="Menu" asp-action="SortedMenu">
+                    <img src="~/img/icons/menu.webp" class="img-fluid" alt="Special Offer 1">
                 </a>
-                <a asp-controller="Menu" asp-action="SortedMenu" class="btn btn-danger ml-2">Sorted Menu</a>
             </div>
+        </div>
 
-            <hr class="my-4">
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <img src="~/img/icons/special.jpg" class="card-img-top" alt="Special Offer 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Special Offers</h5>
-                            <p class="card-text">Enjoy our special dish with a discount for a limited time.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img src="~/img/icons/event.webp" class="card-img-top" alt="Upcoming Event 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Upcoming Events</h5>
-                            <p class="card-text">Join us for a live music performance this weekend.</p>
-                        </div>
-                    </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <img src="~/img/icons/special.jpg" class="img-fluid" alt="Special Offer 2">
+                <div class="card-body">
+                    <h5 class="card-title">Special Offers</h5>
+                    <p class="card-text">Enjoy our special dish with a discount for a limited time.</p>
                 </div>
             </div>
         </div>
 
         <div class="col-md-4">
+            <div class="card h-100">
+                <img src="~/img/icons/event.webp" class="img-fluid" alt="Upcoming Event 1">
+                <div class="card-body">
+                    <h5 class="card-title">Upcoming Events</h5>
+                    <p class="card-text">Join us for a live music performance this weekend. Immerse yourself in the enchanting world of music as our talented musicians take the stage. Whether you're planning a romantic date night or a gathering with friends, our live music event promises to create lasting memories. We look forward to sharing this magical experience with you</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
             <div class="contact-info">
                 <h3>Contact Information</h3>
                 <address>

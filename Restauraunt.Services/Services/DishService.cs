@@ -84,7 +84,7 @@ namespace Restaurant.Services.Services
         {
             try
             {
-                var query = _dishRepository.GetAll().Where(item => item.Category.ToString() == category).Include(p => p.DishPhotos);
+                var query = _dishRepository.GetAll().Where(item => (item.Category == Enum.Parse<Category>(category))).Include(p => p.DishPhotos);
 
                 var pagedQuery = query.Skip((page - 1) * pageSize).Take(pageSize);
 
@@ -293,7 +293,7 @@ namespace Restaurant.Services.Services
         {
             try
             {
-                return await _dishRepository.GetAll().CountAsync(item => item.Category.ToString() == category);
+                return await _dishRepository.GetAll().CountAsync(item => (item.Category == Enum.Parse<Category>( category)));
             }
             catch (Exception)
             {

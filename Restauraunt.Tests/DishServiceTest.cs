@@ -163,7 +163,7 @@ namespace Restauraunt.Tests
 
         [Theory]
         [AutoData]
-        public void GetDishes_WithExistingProducts_ReturnsBaseResponseWithDishesList()
+        public async void GetDishes_WithExistingProducts_ReturnsBaseResponseWithDishesList()
         {
             // Arrange
             var dishes = new List<Dish> { new() };
@@ -172,7 +172,7 @@ namespace Restauraunt.Tests
                 .Returns(dishes.AsQueryable());
 
             // Act
-            var result = _dishService.GetDishes(1, 10);
+            var result =await  _dishService.GetDishes(1, 10);
 
             // Assert
             result.StatusCode.Should().Be(StatusCode.OK);
@@ -180,7 +180,7 @@ namespace Restauraunt.Tests
         }
 
         [Fact]
-        public void GetDishes_WithNoDishes_ReturnsBaseResponseWithZeroElements()
+        public async void GetDishes_WithNoDishes_ReturnsBaseResponseWithZeroElements()
         {
             // Arrange
             var dishes = new List<Dish>();
@@ -188,7 +188,7 @@ namespace Restauraunt.Tests
             _dishRepository.GetAll().Include(p => p.DishPhotos).Returns(dishes.AsQueryable());
 
             // Act
-            var result = _dishService.GetDishes();
+            var result =await  _dishService.GetDishes(1, 10);
 
             // Assert
             result.StatusCode.Should().Be(StatusCode.OK);
@@ -197,14 +197,14 @@ namespace Restauraunt.Tests
 
         [Theory]
         [AutoData]
-        public void GetProducts_WithException_ReturnsBaseResponseWithInternalServerError(
+        public async Task GetProducts_WithException_ReturnsBaseResponseWithInternalServerErrorAsync(
             Exception exception)
         {
             // Arrange
             _dishRepository.GetAll().Include(p => p.DishPhotos).Throws(exception);
 
             // Act
-            var result = _dishService.GetDishes();
+            var result =await  _dishService.GetDishes(1, 10);
 
             // Assert
             result.StatusCode.Should().Be(StatusCode.InternalServerError);

@@ -1,24 +1,19 @@
-# MyRestoraunt Цей проект буде представляти собою систему управління рестораном, розроблену на платформі ASP.NET Core 6.0 з використанням Entity Framework Core для доступу до бази даних. Система дозволить ресторанам управляти замовленнями, стравами та іншими аспектами роботи ресторану. 
-# Основні функції
-# Управління Замовленнями: Система дозволятиме створювати та відстежувати замовлення. Кожне замовлення містить інформацію про страви, адресу доставки, дату створення та інші важливі дані.
+# MyRestoraunt This project is a restaurant management system developed on the ASP.NET Core 6.0 platform using the Entity Framework Core for database access. The system will allow restaurants to manage orders, dishes and other aspects of restaurant operations.
+# Basic functions
+# Order Management: The system will allow you to create and track orders. Each order contains information about the dishes, the delivery address, the date of creation and other important data.
 
-# Управління Стравами: Адміністратори ресторану зможуть додавати, редагувати та видаляти страви з меню. Для кожної страви можна вказати назву, опис, ціну та інші характеристики.
+# Dish Management: Restaurant administrators will be able to add, edit and remove dishes from the menu. For each dish, you can specify the name, description, price and other characteristics.
 
-# Система Автентифікації та Авторизації: Використовується механізм аутентифікації за допомогою кукі. Користувачі можуть входити в систему, адміністратори мають спеціальні права доступу для управління даними.
+# Authentication and Authorization System: The cookie authentication mechanism is used. Users can log in, administrators have special access rights to manage data.
 
-# Візуалізація Даних: Система надає можливість відображати дані про замовлення, страви та інші аспекти ресторанного бізнесу у зручному візуальному вигляді.
+# Data visualization: The system provides an opportunity to display data about orders, dishes and other aspects of the restaurant business in a convenient visual form.
 
-# Конфігурування Бази Даних: Для зручності, конфігурація бази даних реалізована за допомогою Entity Framework Core. 
+# Database Configuration: For convenience, database configuration is implemented using Entity Framework Core.
 
-# Проект розроблений, використовуючи шаблон архітектури MVC (Model-View-Controller), що дозволяє розділити логіку додатку на різні компоненти з чітко визначеними обов'язками.
+# The project is developed using the MVC (Model-View-Controller) architecture pattern, which allows you to divide the logic of the application into different components with clearly defined responsibilities.
 
-# Компоненти Архітектури
-# Моделі (Models): Відображають бізнес-об'єкти та структури даних. В даному проекті, вони відображаються в класах, наприклад, Order, Dish, і т.д.
+# Services (Services): Contains business logic and logic of interaction with the database. They help avoid direct dependencies of controllers on repositories or databases.
 
-# Контролери (Controllers): Оброблюють HTTP-запити від користувачів та взаємодіють з моделями та пересилають дані в представлення (views). Вони відповідають за керування взаємодією між веб-інтерфейсом та бізнес-логікою. Приклади: OrderController, DishController.
+# Repositories: Responsible for database access and interaction with models. They help separate business logic from data storage details.
 
-# Представлення (Views): Отримують дані від контролера та відображають їх для користувача. Використовуються HTML-шаблони та додаткові допоміжні засоби (наприклад, Razor) для вбудовування даних.
-
-# Сервіси (Services): Містять бізнес-логіку та логіку взаємодії з базою даних. Вони допомагають уникнути безпосередньої залежності контролерів від репозиторіїв або бази даних.
-
-# Репозиторії (Repositories): Відповідають за доступ до бази даних та взаємодію з моделями. Вони допомагають відділити бізнес-логіку від деталей зберігання даних.
+You can view the project at the following address: 18.194.41.212
